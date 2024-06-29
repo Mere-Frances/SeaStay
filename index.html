@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <!-- Fullpage CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/4.0.22/fullpage.css"
+        integrity="sha512-AIwt5sjXSKDo4t0KSQ/eAuy43kQMc1hYtIKLxaFrHd26nQFzMo1FJdBIickVyGXnhm2xB2OOYBqMBgu3dBU4KA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Jquery UI CSS -->
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.13.3/themes/smoothness/jquery-ui.css">
+    <!-- MapBox CSS -->
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.7.0/mapbox-gl.css' rel='stylesheet' />
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="./css/style.css">
+    <title>testing save</title>
+</head>
+
+<body>
+    <nav id="nav">
+        <div class="navbar">
+            <a class="logo-section">
+                <img src="./images/seastaylogo.png" alt="SeaStay wave logo">
+                <h2>SeaStay</h2>
+            </a>
+            <div class="nav-links">
+                <a class="nav-link active" href="">Search</a>
+                <a class="nav-link" href="">Featured</a>
+                <a class="nav-link" href="">Help</a>
+            </div>
+            <a class="nav-button primary-button">
+                <p>My bookings</p>
+            </a>
+        </div>
+    </nav>
+
+    <!-- Fullpage Reuired HTML -->
+    <!-- fullpage container YOU NEED ALWAYS-->
+    <div id="fullpage" class="fullpage-container">
+        <!-- sections for the verticals - NEED ATLEAST 1 -->
+        <div class="section section-1">
+            <!-- Slides go inside a section -->
+            <div class="slide">
+
+                <div class="home-header">
+                    <div class="header-design">
+                        <h1>Discover Aotearoa's Coastal<span class="header-script">Gems</span></h1>
+                        <a class="primary-button">
+                            <p>Start looking</p>
+                        </a>
+                    </div>
+                    <div class="header-squiggles">
+                        <img src="./images/squiggles.png" alt="watercolor brush strokes">
+                    </div>
+                </div>
+
+                <form class="filter-container">
+                    <div class="form-top">
+                        <h2>Search</h2>
+                        <div id="buildingTypeFilters" class="form-categories">
+                            <label><input type="checkbox" class="buildingType" value="Hotel"> Hotel</label>
+                            <label><input type="checkbox" class="buildingType" value="Motel"> Motel</label>
+                            <label><input type="checkbox" class="buildingType" value="Hostel"> Hostel</label>
+                            <label><input type="checkbox" class="buildingType" value="House"> House</label>
+                            <!-- <option valie="hotel" id="hotels" class="category-type" href="">Hotels</option>
+                            <option valie="hotel" id="hotels" class="category-type" href="">Motels</option>
+                            <option valie="hotel" id="hotels" class="category-type" href="">Hostels</option>
+                            <option valie="hotel" id="hotels" class="category-type" href="">Baches</option> -->
+                        </div>
+                    </div>
+
+                    <div class="form-filters">
+                        <!-- Location Filter -->
+                        <div class="filter">
+                            <label for="location">
+                                <p>Location</p>
+                            </label>
+                            <select name="location" id="location" class="full-width-select" required>
+                                <option value="">Select a city</option>
+                            </select>
+                        </div>
+
+                        <!-- Start Date -->
+                        <div class="filter">
+                            <label for="startDate">
+                                <p>Check In</p>
+                            </label>
+                            <input type="text" id="startDate" placeholder="Select a date" name="startDate"
+                                class="full-width-select" required>
+                        </div>
+
+                        <!-- End Date -->
+                        <div class="filter">
+                            <label for="endDate">
+                                <p>Check Out</p>
+                            </label>
+                            <input type="text" id="endDate" placeholder="Select a date" name="endDate"
+                                class="full-width-select" required>
+                        </div>
+
+                        <!-- HIDDEN bedrooms -->
+                        <div id="hiddenFilter" class="filter hidden-filter">
+                            <label for="bedrooms">
+                                <p>Bedrooms</p>
+                            </label>
+                            <select name="bedrooms" id="bedrooms" class="full-width-select">
+                                <option value="">Number of bedrooms</option>
+                                <option value="1">1+</option>
+                                <option value="2">2+</option>
+                                <option value="3">3+</option>
+                                <option value="4">4+</option>
+                                <option value="5">5+</option>
+                                <option value="6">6+</option>
+                            </select>
+                        </div>
+
+                        <!-- HIDDEN bathrooms -->
+                        <div id="hiddenFilter" class="filter hidden-filter">
+                            <label for="bathrooms">
+                                <p>Bathrooms</p>
+                            </label>
+                            <select name="bathrooms" id="bathrooms" class="full-width-select">
+                                <option value="">Number of bathrooms</option>
+                                <option value="1">1+</option>
+                                <option value="2">2+</option>
+                                <option value="3">3+</option>
+                                <option value="4">4 or more</option>
+                            </select>
+                        </div>
+
+                        <!-- HIDDEN number of guests -->
+                        <div id="hiddenFilter" class="filter hidden-filter">
+                            <label for="guests">
+                                <p>Guests</p>
+                            </label>
+                            <select name="guests" id="guests" class="full-width-select">
+                                <option value="">Number of guests</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="4">5 or more</option>
+                            </select>
+                        </div>
+
+                        <!-- HIDDEN rating -->
+                        <div id="hiddenFilter" class="filter hidden-filter">
+                            <label for="rating">
+                                <p>Rating</p>
+                            </label>
+                            <select name="rating" id="rating" class="full-width-select">
+                                <option value="">Guest rating</option>
+                                <option value="1">1 star</option>
+                                <option value="2">2 stars</option>
+                                <option value="3">3 stars</option>
+                                <option value="4">4 stars</option>
+                                <option value="4">5 stars</option>
+                            </select>
+                        </div>
+
+                        <!-- See more options button -->
+                        <div id="open" class="filter see-more-filter">
+                            <label for="">
+                                <p id="seeMoreText">More</p>
+                            </label>
+                            <a id="seeMoreLink">More options</a>
+                        </div>
+
+                        <div id="searchBtn" class="search-button">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </div>
+                    </div>
+
+                    <div id="error-message" class="error-message"></div>
+                </form>
+
+                <div class="sorting-content">
+                    <div id="show" class="secondary-button sort-btn">
+                        <i class="fa-solid fa-sliders"></i>
+                        <p id="sortText">Sort</p>
+                    </div>
+
+                    <div id="box" class="sorting-container">
+                        <div class="sorting-buttons">
+
+                            <a id="priceMin" class="select-button">Lowest price</a>
+                            <a id="priceMax" class="select-button">Highest price</a>
+                            <a id="sortPop" class="select-button">Most popular</a>
+                            <a id="sortRating" class="select-button">Top rated</a>
+                            <a id="removeAll" class="secondary-button sort-btn">Reset</a>
+
+                            <!-- <div class="select-button">Lowest price</div>
+                            <div class="select-button">Highest price</div>
+                            <div class="select-button">Popular</div>
+                            <div class="select-button">Top rated</div> -->
+                        </div>
+                    </div>
+                </div>
+
+                <div id="products" class="products"></div>
+
+                <!-- SWIPER -->
+                <div class="swiper">
+                    <div class="swiper-wrapper">
+                        <!-- SWIPER SLIDES - FROM JS -->
+                    </div>
+                    <!-- pagination -->
+                    <div class="swiper-pagination"></div>
+                </div>
+
+            </div>
+            <!-- End of Slide 1 -->
+
+            <!-- Slide 2 - FILTERED CARD OUTPUT -->
+            <div class="slide">
+                <!-- SWIPER -->
+                <div id="swiper" class="swiper">
+                    <div class="swiper-wrapper">
+                        <!-- SWIPER SLIDES - FROM JS -->
+                    </div>
+                    <!-- pagination -->
+                    <div class="swiper-pagination"></div>
+                </div>
+            </div>
+
+            <!-- Slide 3 - SELECTED CARD OUTPUT -->
+            <div class="slide" id="selectedCardOutputSlide"></div>
+
+        </div>
+    </div>
+
+    <!-- Jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <!-- Jquery UI -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.13.3/jquery-ui.min.js"></script>
+    <!-- FullPage JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/4.0.22/fullpage.min.js"
+        integrity="sha512-yHHLi2ZwgtW9QNVZd0asqMyWGJ6Kx73ijKlGWSi3MwYFB5ZzOJV8wPtopKr6muHk5SERgF3OB/2dZj3StlI34w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <!-- MapBox -->
+    <script src='https://api.mapbox.com/mapbox-gl-js/v2.7.0/mapbox-gl.js'></script>
+    <!-- font awesome icons -->
+    <script src="https://kit.fontawesome.com/40be05a600.js" crossorigin="anonymous"></script>
+    <!-- Custom JS -->
+    <script src="./js/script.min.js"></script>
+</body>
+
+</html>
