@@ -1,72 +1,59 @@
 /* jshint esversion: 6 */
 
-// // initialise jquery
-// $(document).ready(function () {
-//     // jquery functions here
-//     // jquery datepicker
-//     $("#datepicker").datepicker();
-// });
+$(document).ready(function () {
+    // ALL JS GOES IN HERE
+    $('#fullpage').fullpage({
+        licenseKey: 'gplv3-license',
+        controlArrows: false,
+        fixedElements: "#navbar",
+        autoScrolling: true,
+        scrollHorizontally: true,
+    });
 
-// $(document).ready(function () {
+    //methods
+    $.fn.fullpage.setAllowScrolling(false);
 
-//     $('#fullpage').fullpage({
-//         // license
-//         licenseKey: 'gplv3-license',
-//         //options here
-//         autoScrolling: true,
-//         // scrollHorizontally: true,
-//         // v turns on navigation arrows v
-//         navigation: true,
-//         // slidesNavigation:true,
-//         controlArrows: false,
-//         setAllowScrolling: true,
-//     });
+    //  Function to move to the specified section
+    function moveToSection(number) {
+        // v allows you to move sections or "jump"
+        fullpage_api.moveTo(number);
+    }
 
-//     //methods
-//     $.fn.fullpage.setAllowScrolling(true);
-
-//     //  Function to move to the specified section
-//     function moveToSection(number) {
-//         // v allows you to move sections or "jump"
-//         fullpage_api.moveTo(number);
-//     }
-
-//     $('goToSection1').click(function () {
-//         moveToSection(1);
-//         fullpage_api.getScrollY();
-//     })
-//     $('goToSection2').click(function () {
-//         moveToSection(2);
-//     })
-//     $('goToSection3').click(function () {
-//         moveToSection(3);
-//     })
-//     $('goToSection4').click(function () {
-//         moveToSection(4);
-//     })
+    $('goToSection1').click(function () {
+        moveToSection(1);
+    })
+    $('goToSection2').click(function () {
+        moveToSection(2);
+    })
+    $('goToSection3').click(function () {
+        moveToSection(3);
+    })
+    $('goToSection4').click(function () {
+        moveToSection(4);
+    })
 
 
 
-//     // Move to slide # - first number is sectin, second is slide - zero indexed for slides
-//     $('#goToSlide1').click(function () {
-//         fullpage_api.moveTo(1, 0);
-//     });
+    // Move to slide # - first number is sectin, second is slide - zero indexed for slides
+    $('#goToSlide1').click(function () {
+        fullpage_api.moveTo(1, 0);
+    });
 
-//     $('#goToSlide2').click(function () {
-//         fullpage_api.moveTo(1, 1);
-//     });
+    $('#goToSlide2').click(function () {
+        fullpage_api.moveTo(1, 1);
+    });
 
-//     $('#goToSlide3').click(function () {
-//         fullpage_api.moveTo(1, 2);
-//     });
+    $('#goToSlide3').click(function () {
+        fullpage_api.moveTo(1, 2);
+    });
 
-//     $('#goToSlide4').click(function () {
-//         fullpage_api.moveTo(1, 3);
-//     });
+    $('#goToSlide4').click(function () {
+        fullpage_api.moveTo(1, 3);
+    });
 
-//     let user;
+    let user;
 
-// });
+});
 
 const properties = [{
         id: 1,
@@ -78,6 +65,7 @@ const properties = [{
         minGuests: 1,
         maxGuests: 2,
         price: 157,
+        rating: '5.0',
         location: 'Northland',
         address: 'Bay of Islands',
         longitude: 174.09179080652817,
@@ -99,6 +87,7 @@ const properties = [{
         minGuests: 1,
         maxGuests: 2,
         price: 157,
+        rating: '5.0',
         location: 'Northland',
         address: 'Ninety Mile Beach',
         longitude: 172.92800063683302,
@@ -120,6 +109,7 @@ const properties = [{
         minGuests: 2,
         maxGuests: 4,
         price: 90,
+        rating: '4.93',
         location: 'Northland',
         address: 'Matai Beach',
         longitude: 173.40800725146022,
@@ -141,6 +131,7 @@ const properties = [{
         minGuests: 1,
         maxGuests: 2,
         price: 157,
+        rating: '4.9',
         location: 'Auckland',
         address: 'Mission Bay',
         longitude: 174.84349015267313,
@@ -162,6 +153,7 @@ const properties = [{
         minGuests: 1,
         maxGuests: 1,
         price: 30,
+        rating: '4.4',
         location: 'Auckland',
         address: 'Auckland City',
         longitude: 174.72599082856544,
@@ -183,6 +175,7 @@ const properties = [{
         minGuests: 1,
         maxGuests: 4,
         price: 240,
+        rating: '4.9',
         location: 'Auckland',
         address: 'Kawakawa Bay',
         longitude: 175.16721039779011,
@@ -204,6 +197,7 @@ const properties = [{
         minGuests: 1,
         maxGuests: 4,
         price: 240,
+        rating: '5.0',
         location: 'Coromandel',
         address: 'Wainui Bay',
         longitude: 175.47740463274323,
@@ -225,6 +219,7 @@ const properties = [{
         minGuests: 1,
         maxGuests: 1,
         price: 30,
+        rating: '5.0',
         location: 'Coromandel',
         address: 'Coromandel',
         longitude: 175.49702954501112,
@@ -246,6 +241,7 @@ const properties = [{
         minGuests: 1,
         maxGuests: 1,
         price: 30,
+        rating: '4.8',
         location: 'Bay of Plenty',
         address: 'Mount Maunganui',
         longitude: 176.1779258992488,
@@ -267,6 +263,7 @@ const properties = [{
         minGuests: 1,
         maxGuests: 2,
         price: 157,
+        rating: '4.58',
         location: 'Bay of Plenty',
         address: 'Waihi Beach',
         longitude: 175.9322056205622,
@@ -288,6 +285,7 @@ const properties = [{
         minGuests: 1,
         maxGuests: 4,
         price: 240,
+        rating: '4.6',
         location: 'Bay of Plenty',
         address: 'Papamoa Beach',
         longitude: 176.28889989799066,
@@ -309,6 +307,7 @@ const properties = [{
         minGuests: 2,
         maxGuests: 4,
         price: 90,
+        rating: '4.7',
         location: 'Bay of Plenty',
         address: 'Ōhope Beach',
         longitude: 177.05662051038237,
@@ -330,6 +329,7 @@ const properties = [{
         minGuests: 1,
         maxGuests: 2,
         price: 157,
+        rating: '5.0',
         location: 'Abel Tasman',
         address: 'Medlands Beach',
         longitude: 175.49388227925743,
@@ -351,6 +351,7 @@ const properties = [{
         minGuests: 2,
         maxGuests: 4,
         price: 90,
+        rating: '4.9',
         location: 'Abel Tasman',
         address: 'Tasman Beach',
         longitude: 173.05310602181888,
@@ -372,6 +373,7 @@ const properties = [{
         minGuests: 1,
         maxGuests: 2,
         price: 157,
+        rating: '5.0',
         location: 'Waiheke',
         address: 'Waiheke Island',
         longitude: 175.02065224427704,
@@ -393,6 +395,7 @@ const properties = [{
         minGuests: 1,
         maxGuests: 2,
         price: 157,
+        rating: '5.0',
         location: 'Waiheke',
         address: 'Waiheke Island',
         longitude: 175.0795529813405,
@@ -414,6 +417,7 @@ const properties = [{
         minGuests: 1,
         maxGuests: 4,
         price: 240,
+        rating: '5.0',
         location: 'Waiheke',
         address: 'Waiheke Island',
         longitude: 175.04801081758828,
@@ -435,6 +439,7 @@ const properties = [{
         minGuests: 2,
         maxGuests: 4,
         price: 90,
+        rating: '4.8',
         location: 'Marlborough',
         address: 'Marlborough',
         longitude: 174.00853213000875,
@@ -456,6 +461,7 @@ const properties = [{
         minGuests: 1,
         maxGuests: 4,
         price: 240,
+        rating: '5.0',
         location: 'Marlborough',
         address: 'Robin Hood Bay',
         longitude: 174.07770655559068,
@@ -477,6 +483,7 @@ const properties = [{
         minGuests: 1,
         maxGuests: 4,
         price: 240,
+        rating: '5.0',
         location: 'Marlborough',
         address: 'Marlborough',
         longitude: 173.75950257977306,
@@ -492,12 +499,6 @@ const properties = [{
 
 
 $(document).ready(function () {
-    // Fullpage Init:
-    new fullpage('#fullpage', {
-        licenseKey: 'gplv3-license',
-        controlArrows: false,
-        fixedElements: "#navbar",
-    });
 
     // MapBox Init:
     mapboxgl.accessToken = 'pk.eyJ1IjoiY2lhcmFuc2xvdyIsImEiOiJjbHY0ZW91YnYwOGV3MmlwOGQ5b3l3a3J3In0.EFWZEAWA13ehFAw5jdLqJA';
@@ -558,14 +559,7 @@ $(document).ready(function () {
             isValid = false;
             errorMessage += "Please select a location.<br>";
         }
-        // if ($("#bedrooms").val() === "") {
-        //     isValid = false;
-        //     errorMessage += "Please selecet the minimum number of bedrooms.<br>";
-        // }
-        // if ($("#bathrooms").val() === "") {
-        //     isValid = false;
-        //     errorMessage += "Please selecet the minimum number of bathrooms.<br>";
-        // }
+
         if ($('#startDate').val() === "") {
             isValid = false;
             errorMessage += "Please select a start date.<br>";
@@ -609,7 +603,7 @@ $(document).ready(function () {
         const guests = parseInt($('#guests').val(), 10) || 1;
         const diffDays = calculateDays();
         const selectedBuildingTypes = [];
-        $('.buildingType:checked').each(function() {
+        $('.buildingType:checked').each(function () {
             selectedBuildingTypes.push($(this).val());
         });
 
@@ -627,14 +621,12 @@ $(document).ready(function () {
 
         });
 
-        document.getElementById('priceMin').addEventListener('click', () => {
-            console.log('lowest button clicked');
-            displayProperties(properties.sort((a, b) => parseFloat(a.price) - parseFloat(b.price)));
+        $('#priceMin').click(() => {
+            displayProperties(filteredProperties.sort((a, b) => parseFloat(a.price) - parseFloat(b.price)));
         });
-        
-        document.getElementById('priceMax').addEventListener('click', () => {
-            console.log('clickyyy');
-            displayProperties(properties.sort((a, b) => parseFloat(b.price) - parseFloat(a.price)));
+
+        $('#priceMax').click(() => {
+            displayProperties(filteredProperties.sort((a, b) => parseFloat(b.price) - parseFloat(a.price)));
         });
 
         console.log(filteredProperties);
@@ -694,9 +686,22 @@ $(document).ready(function () {
                             <h6>per night</h6>
                         </div>
                         <p>${property.description}</p>
-                        <div class="icons"></div>
+                        <div class="card-icons">
+                            <div class="icons">
+                                <i class="fa-solid fa-bed"></i>
+                                <p>${property.bedrooms}</p>
+                            </div>
+                            <div class="icons">
+                                <i class="fa-solid fa-bath"></i>
+                                <p>${property.bathrooms}</p>
+                            </div>
+                            <div class="icons">
+                                <i class="fa-solid fa-star"></i>
+                                <p>${property.rating}</p>
+                            </div>
+                        </div>
                         <div class="card-button-section">
-                            <a class="primary-button">
+                            <a class="book-now-btn primary-button" data-id="${property.id}">
                                 <p>Book now</p>
                             </a>
                         </div>
@@ -704,6 +709,48 @@ $(document).ready(function () {
                 </div>
             `;
             products.innerHTML += propertyHtml;
+            // Add event listener for all 'Book now' buttons
+            document.querySelectorAll('.book-now-btn').forEach(button => {
+                button.addEventListener('click', function () {
+                    fullpage_api.moveTo(1, 1); // slide 2
+                });
+            });
+
+            function populateSelectResult(propertyPreview) {
+                const preview = $('#PropertyCardPreview');
+                preview.empty();
+                const previewProperty = properties.find(property => property.id === propertyPreview);
+                if (!previewProperty) {
+                    console.log('not found', propertyPreview);
+                    return;
+                }
+                preview.append(`
+                    <div id="preview-${property.id}" class="previewTest">
+                        <p>is it wokring yet?</p>
+                        <p>${property.name}</p>
+                        <img src="${property.images}">
+                    </div>
+                `);
+            }
+
+            function previewHandlers() {
+                $('.book-now-btn').click(function (event) {
+                    console.log("CLICKED");
+                    const value = $(this).data('id');
+                    console.log(value);
+                    var buttonId = $(this).attr('id');
+                    $('#previewContainer').removeAttr('class').addClass(buttonId);
+                    $('body').addClass('preview-active');
+                    populateSelectResult(value);
+                });
+            
+            }
+            // Function to move to the next slide (you might already have this function)
+            function moveTo(x, y) {
+                // Your existing moveTo function implementation
+            }
+            previewHandlers();
+
         });
 
         // Reinitialize Swiper for new content
@@ -722,9 +769,8 @@ $(document).ready(function () {
         // Rebuild Fullpage to see the new slides
         fullpage_api.reBuild();
     }
+
 });
-
-
 
 // populateProperties(properties);
 

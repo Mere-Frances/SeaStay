@@ -134,8 +134,7 @@ nav {
 }
 
 .slide:nth-child(2) {
-  background: rgb(255, 255, 255);
-  background: linear-gradient(90deg, rgb(200, 200, 200) 0%, rgb(126, 132, 143) 100%);
+  background: rgb(255, 0, 0);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -489,20 +488,31 @@ label {
     gap: 10px;
     height: 50%;
 
-    .main-titles {
+    .main-titles, .sub-titles, .card-icons {
       display: flex;
       justify-content: space-between;
-    }
-
-    .sub-titles {
-      display: flex;
-      justify-content: space-between;
+      .icons{
+        display: flex;
+        flex-direction: row;
+      }
     }
 
     .card-button-section {
       display: flex;
       justify-content: flex-end;
     }
+  }
+}
+
+.property-preview{
+  background-color: #1fcc19;
+  height: 1000px;
+  width: 1000px;
+  position: relative;
+  top: 200px;
+  .preview-container{
+    height: 50%;
+    width: 50%;
   }
 }
 
