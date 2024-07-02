@@ -1,38 +1,11 @@
 /* jshint esversion: 6 */
 
 $(document).ready(function () {
-    // ALL JS GOES IN HERE
-    $('#fullpage').fullpage({
-        licenseKey: 'gplv3-license',
-        controlArrows: false,
-        fixedElements: "#navbar",
-        autoScrolling: true,
-        scrollHorizontally: true,
-    });
-
-    //methods
-    $.fn.fullpage.setAllowScrolling(false);
-
     //  Function to move to the specified section
     function moveToSection(number) {
         // v allows you to move sections or "jump"
         fullpage_api.moveTo(number);
     }
-
-    $('goToSection1').click(function () {
-        moveToSection(1);
-    })
-    $('goToSection2').click(function () {
-        moveToSection(2);
-    })
-    $('goToSection3').click(function () {
-        moveToSection(3);
-    })
-    $('goToSection4').click(function () {
-        moveToSection(4);
-    })
-
-
 
     // Move to slide # - first number is sectin, second is slide - zero indexed for slides
     $('#goToSlide1').click(function () {
@@ -55,6 +28,86 @@ $(document).ready(function () {
 
 });
 
+const menuOptions = {
+    breakfast: [{
+            id: 1,
+            name: "Pancakes",
+            price: 5.99,
+            description: "Fluffy pancakes served with maple syrup and fresh berries"
+        },
+        {
+            id: 2,
+            name: "Omelette",
+            price: 6.99,
+            description: "Three-egg omelette with cheese, ham, and bell peppers"
+        },
+        {
+            id: 3,
+            name: "French Toast",
+            price: 5.49,
+            description: "Golden-brown French toast with powdered sugar and a side of fruit"
+        }
+    ],
+    lunch: [{
+            id: 4,
+            name: "Grilled Chicken Sandwich",
+            price: 8.99,
+            description: "Grilled chicken breast with lettuce, tomato, and mayo on a toasted bun"
+        },
+        {
+            id: 5,
+            name: "Caesar Salad",
+            price: 7.99,
+            description: "Crisp romaine lettuce with Caesar dressing, croutons, and Parmesan cheese"
+        }
+    ],
+    dinner: [{
+            id: 6,
+            name: "Spaghetti Bolognese",
+            price: 12.99,
+            description: "Spaghetti with a rich and hearty Bolognese sauce"
+        },
+        {
+            id: 7,
+            name: "Grilled Salmon",
+            price: 15.99,
+            description: "Grilled salmon fillet served with a lemon butter sauce and seasonal vegetables"
+        },
+        {
+            id: 8,
+            name: "Steak and Potatoes",
+            price: 18.99,
+            description: "Juicy steak with garlic mashed potatoes and steamed broccoli"
+        }
+    ],
+    drinks: [{
+            id: 9,
+            name: "Mojito",
+            price: 7.50,
+            description: "Refreshing cocktail with white rum, mint, lime, sugar, and soda water"
+        },
+        {
+            id: 10,
+            name: "Margarita",
+            price: 8.00,
+            description: "Classic cocktail with tequila, lime juice, and triple sec, served with a salt rim"
+        },
+        {
+            id: 11,
+            name: "Iced Coffee",
+            price: 3.50,
+            description: "Chilled coffee served over ice with a splash of milk"
+        },
+        {
+            id: 12,
+            name: "Lemonade",
+            price: 2.99,
+            description: "Freshly squeezed lemonade with a hint of mint"
+        }
+    ]
+};
+
+
 const properties = [{
         id: 1,
         name: 'Bayside Suite',
@@ -76,6 +129,7 @@ const properties = [{
             '../images/hotels/northlandhotel1.webp',
             '../images/hotels/northlandhotel2.webp'
         ],
+        bio: 'The Bayside Suite offers a luxurious experience in the beautiful Bay of Islands. With a perfect rating of 5.0, this hotel suite is designed for ultimate comfort. Located in Northland, it provides stunning views and access to various water activities. Guests will enjoy a tranquil stay with modern amenities, making it an ideal spot for a romantic getaway or a peaceful retreat.'
     },
     {
         id: 2,
@@ -98,6 +152,7 @@ const properties = [{
             '../images/hotels/northlandhotel3.webp',
             '../images/hotels/northlandhotel4.webp'
         ],
+        bio: 'Ninety Mile Dream is nestled along the renowned Ninety Mile Beach, offering spectacular ocean views. This hotel boasts a flawless 5.0 rating, ensuring high-quality service and amenities. Located in Northland, it provides a unique blend of relaxation and adventure, with endless sandy shores to explore. Ideal for couples or solo travelers seeking a memorable beachside experience.'
     },
     {
         id: 3,
@@ -120,13 +175,14 @@ const properties = [{
             '../images/motels/northlandmotel1.webp',
             '../images/motels/northlandmotel2.webp'
         ],
+        bio: 'Easy Living offers a serene escape near Matai Beach in Northland. With a near-perfect rating of 4.93, this motel provides a cozy and affordable option for families or groups. Guests can enjoy the pristine beach and tranquil surroundings, making it an excellent choice for a laid-back vacation.'
     },
     {
         id: 4,
         name: 'Dreamy Resort',
         minStay: 1,
         maxStay: 5,
-        bedrooms: '1-2',
+        bedrooms: 1,
         bathrooms: 2,
         minGuests: 1,
         maxGuests: 2,
@@ -142,13 +198,14 @@ const properties = [{
             '../images/hotels/aucklandhotel1.webp',
             '../images/hotels/aucklandhotel2.webp'
         ],
+        bio: 'Dreamy Resort is a luxurious retreat in Mission Bay, Auckland. This high-end hotel, with a rating of 4.9, offers stunning views of the bay and top-notch amenities. Guests can indulge in the beauty of Auckland while enjoying the resort\'s luxurious facilities, making it a perfect destination for those seeking elegance and comfort.'
     },
     {
         id: 5,
         name: 'City Scape Hostel',
         minStay: 1,
         maxStay: 10,
-        bedrooms: '1-2',
+        bedrooms: 1,
         bathrooms: 1,
         minGuests: 1,
         maxGuests: 1,
@@ -164,6 +221,7 @@ const properties = [{
             '../images/hostels/aucklandhostel1.webp',
             '../images/hostels/aucklandhostel2.webp'
         ],
+        bio: 'City Scape Hostel is a budget-friendly option located in the vibrant heart of Auckland City. With a rating of 4.4, it provides essential amenities and a convenient location for exploring the city. Ideal for solo travelers or backpackers, this hostel offers a comfortable and affordable stay within walking distance of major attractions and public transport.'
     },
     {
         id: 6,
@@ -186,6 +244,7 @@ const properties = [{
             '../images/houses/aucklandhouse1.webp',
             '../images/houses/aucklandhouse2.webp'
         ],
+        bio: 'Family Bach Retreat offers a spacious and comfortable stay in Kawakawa Bay, Auckland. This house, with a 4.9 rating, is ideal for families looking for a relaxing getaway. Surrounded by natural beauty, it features ample space and modern amenities, making it perfect for longer stays and family gatherings.'
     },
     {
         id: 7,
@@ -208,6 +267,7 @@ const properties = [{
             '../images/houses/coromandelhouse1.webp',
             '../images/houses/coromandelhouse2.webp'
         ],
+        bio: 'Beachside Bliss is a beautiful house located by Wainui Bay in Coromandel. With a perfect rating of 5.0, this property offers stunning beach views and luxurious amenities. It\'s an ideal spot for families or groups seeking a relaxing and scenic coastal vacation, complete with modern comforts and direct beach access.'
     },
     {
         id: 8,
@@ -230,6 +290,7 @@ const properties = [{
             '../images/hostels/coromandelhostel1.webp',
             '../images/hostels/coromandelhostel2.webp'
         ],
+        bio: 'Oceanfront Oasis is an affordable hostel located in the picturesque Coromandel. With a 5.0 rating, it provides budget travelers with a unique oceanfront experience. Guests can enjoy breathtaking sea views and easy access to local attractions, making it an excellent choice for solo travelers seeking adventure and serenity.'
     },
     {
         id: 9,
@@ -245,13 +306,14 @@ const properties = [{
         location: 'Bay of Plenty',
         address: 'Mount Maunganui',
         longitude: 176.1779258992488,
-        latitude: -37.63236339793598,
+        latitude: -37.64284604642042,
         houseType: 'Hostel',
-        description: 'A hostel in Mount Maunganui, ideal for budget travelers.',
+        description: 'A lively hostel located in the vibrant Mount Maunganui area.',
         images: [
             '../images/hostels/bayplentyhostel1.webp',
             '../images/hostels/bayplentyhostel2.webp'
         ],
+        bio: 'Waves & Bays is a lively hostel in the vibrant Mount Maunganui area, Bay of Plenty. With a 4.8 rating, it offers a fun and social atmosphere for budget-conscious travelers. Guests can enjoy the bustling local scene, beautiful beaches, and various outdoor activities, making it a great choice for those looking to explore and meet new people.'
     },
     {
         id: 10,
@@ -274,6 +336,7 @@ const properties = [{
             '../images/hotels/bayplentyhotel1.webp',
             '../images/hotels/bayplentyhotel2.webp'
         ],
+        bio: 'Sea Breeze Haven is a serene hotel located at Waihi Beach in the Bay of Plenty. With a rating of 4.58, this property offers a tranquil retreat for couples or solo travelers. Featuring 1 bedroom and 2 bathrooms, it can accommodate up to 2 guests. Guests can enjoy beautiful beach views and a peaceful atmosphere. The hotel provides all the necessary amenities for a comfortable stay and is ideal for those looking to relax and unwind by the sea.'
     },
     {
         id: 11,
@@ -295,14 +358,15 @@ const properties = [{
         images: [
             '../images/houses/bayplentyhouse1.webp',
             '../images/houses/bayplentyhouse2.webp'
-        ],
+        ],        
+        bio: 'Oceanview Hideaway is a charming house located in the beautiful Papamoa Beach area of Bay of Plenty. With a rating of 4.6, this property is perfect for families or small groups, offering 2 bedrooms and 3 bathrooms. Guests can enjoy stunning ocean views and a serene atmosphere. The house can accommodate up to 4 guests and provides all the necessary amenities for a comfortable stay. Its proximity to the beach makes it an ideal spot for those looking to relax and unwind by the sea.',
     },
     {
         id: 12,
         name: 'Tidal Retreat',
         minStay: 3,
         maxStay: 10,
-        bedrooms: '1-2',
+        bedrooms: 1,
         bathrooms: 1,
         minGuests: 2,
         maxGuests: 4,
@@ -318,6 +382,7 @@ const properties = [{
             '../images/motels/bayplentymotel1.webp',
             '../images/motels/bayplentymotel2.webp'
         ],
+        bio: 'Tidal Retreat is a cozy motel located near the serene Ōhope Beach in Bay of Plenty. With a high rating of 4.7, this property is perfect for couples or small groups seeking a peaceful getaway. The motel features 1 bedroom and 1 bathroom, accommodating up to 4 guests. Guests can enjoy the tranquil atmosphere and beautiful beach views. This property is ideal for those looking to escape the hustle and bustle and enjoy a relaxing vacation by the sea.',
     },
     {
         id: 13,
@@ -340,6 +405,7 @@ const properties = [{
             '../images/hotels/tasmanhotel1.webp',
             '../images/hotels/tasmanhotel2.webp'
         ],
+        bio: 'Shoreline Sanctuary is a serene hotel located at Medlands Beach in Abel Tasman. This property boasts a perfect rating of 5.0, making it an ideal choice for couples seeking a romantic getaway. With 1 bedroom and 2 bathrooms, the hotel can accommodate up to 2 guests. Guests can enjoy stunning beach views and a peaceful atmosphere. The hotel offers all the necessary amenities for a comfortable stay and is perfect for those looking to relax and unwind by the beach.',
     },
     {
         id: 14,
@@ -362,6 +428,7 @@ const properties = [{
             '../images/motels/tasmanmotel1.webp',
             '../images/motels/tasmanmotel2.webp'
         ],
+        bio: 'Horizon Dwelling is a comfortable motel located at Tasman Beach in Abel Tasman. With a high rating of 4.9, this property is perfect for couples or small groups seeking a relaxing stay. The motel features 1 bedroom and 1 bathroom, accommodating up to 4 guests. Guests can enjoy beautiful beach views and a peaceful atmosphere. The motel offers all the necessary amenities for a comfortable stay and is ideal for those looking to unwind and enjoy a tranquil beach vacation.',
     },
     {
         id: 15,
@@ -384,6 +451,7 @@ const properties = [{
             '../images/hotels/waihekehotel1.webp',
             '../images/hotels/waihekehotel2.webp'
         ],
+        bio: 'Sun-Kissed Shores is a sunlit hotel located on Waiheke Island, perfect for beach lovers. With a perfect rating of 5.0, this property is ideal for couples seeking a romantic beach getaway. The hotel features 1 bedroom and 1 bathroom, accommodating up to 2 guests. Guests can enjoy stunning beach views and a warm, sunny atmosphere. The hotel offers all the necessary amenities for a comfortable stay and is perfect for those looking to relax and soak up the sun on Waiheke Island.',
     },
     {
         id: 16,
@@ -406,6 +474,7 @@ const properties = [{
             '../images/hotels/waihekehotel3.webp',
             '../images/hotels/waihekehotel4.webp'
         ],
+        bio: 'The Starfish Suite is a luxurious hotel suite located on Waiheke Island, offering stunning sea views. With a perfect rating of 5.0, this property is ideal for couples seeking a romantic and luxurious getaway. The suite features 1 bedroom and 2 bathrooms, accommodating up to 2 guests. Guests can enjoy breathtaking ocean views and a serene atmosphere. The suite offers all the necessary amenities for a comfortable and luxurious stay and is perfect for those looking to indulge in a lavish beach vacation.',
     },
     {
         id: 17,
@@ -428,6 +497,7 @@ const properties = [{
             '../images/houses/waihekehouse1.webp',
             '../images/houses/waihekehouse2.webp'
         ],
+        bio: 'Seaglass Sanctuary is a beautiful house located on Waiheke Island, perfect for a serene getaway. With a perfect rating of 5.0, this property is ideal for families or small groups seeking a peaceful retreat. The house features 2 bedrooms and 2 bathrooms, accommodating up to 4 guests. Guests can enjoy stunning ocean views and a tranquil atmosphere. The house offers all the necessary amenities for a comfortable stay and is perfect for those looking to relax and unwind in a beautiful beach setting.',
     },
     {
         id: 18,
@@ -450,6 +520,7 @@ const properties = [{
             '../images/motels/marlboroughmotel1.webp',
             '../images/motels/marlboroughmotel2.webp'
         ],
+        bio: 'Sunlit Shores is a cozy motel located in Marlborough, ideal for a sun-soaked vacation. With a high rating of 4.8, this property is perfect for couples or small groups seeking a relaxing stay. The motel features 1 bedroom and 2 bathrooms, accommodating up to 4 guests. Guests can enjoy beautiful views and a warm, sunny atmosphere. The motel offers all the necessary amenities for a comfortable stay and is ideal for those looking to unwind and enjoy a sun-filled vacation in Marlborough.',
     },
     {
         id: 19,
@@ -472,6 +543,7 @@ const properties = [{
             '../images/houses/marlboroughhouse1.webp',
             '../images/houses/marlboroughhouse2.webp'
         ],
+        bio: 'The Seafoam Suite is a luxurious house located in Robin Hood Bay, Marlborough, perfect for a family vacation. With a perfect rating of 5.0, this property is ideal for families or small groups seeking a luxurious retreat. The house features 3 bedrooms and 3 bathrooms, accommodating up to 4 guests. Guests can enjoy stunning ocean views and a serene atmosphere. The house offers all the necessary amenities for a comfortable and luxurious stay and is perfect for those looking to indulge in a lavish beach vacation in Marlborough.',
     },
     {
         id: 20,
@@ -494,43 +566,41 @@ const properties = [{
             '../images/houses/marlboroughhouse3.webp',
             '../images/houses/marlboroughhouse4.webp'
         ],
+        bio: 'Saltwater Serenity is a serene house located in Marlborough, ideal for a peaceful retreat. With a perfect rating of 5.0, this property is ideal for families or small groups seeking a tranquil getaway. The house features 2 bedrooms and 1 bathroom, accommodating up to 4 guests. Guests can enjoy beautiful ocean views and a peaceful atmosphere. The house offers all the necessary amenities for a comfortable stay and is perfect for those looking to relax and unwind in a serene beach setting in Marlborough.',
     },
 ];
 
 
 $(document).ready(function () {
+    // Fullpage Init:
+    new fullpage('#fullpage', {
+        licenseKey: 'gplv3-license',
+        controlArrows: false,
+        fixedElements: "#navbar",
+        autoScrolling: true,
+        scrollHorizontally: true,
+    });
 
-    // MapBox Init:
-    mapboxgl.accessToken = 'pk.eyJ1IjoiY2lhcmFuc2xvdyIsImEiOiJjbHY0ZW91YnYwOGV3MmlwOGQ5b3l3a3J3In0.EFWZEAWA13ehFAw5jdLqJA';
 
-    function initaliseMap(longitude, latitude) {
-        const map = new mapboxgl.Map({
-            container: 'map',
-            style: 'mapbox://styles/mapbox/streets-v11',
-            center: [longitude, latitude],
-            zoom: 13
-        });
-    }
 
     // Prevent scroll of sections and slides:
     fullpage_api.setAllowScrolling(true);
 
-    // Swiper Init:
-    let swiper = new Swiper('.swiper', {
-        // Optional parameters
-        direction: 'horizontal',
-        // If we need pagination
-        pagination: {
-            el: '.swiper-pagination',
-            clickable: true,
-        },
+    // // Swiper Init:
+    // let swiper = new Swiper('.swiper', {
+    //     // Optional parameters
+    //     direction: 'horizontal',
+    //     // If we need pagination
+    //     pagination: {
+    //         el: '.swiper-pagination',
+    //     },
 
-        // Navigation arrows
-        navigation: {
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev',
-        },
-    });
+    //     // Navigation arrows
+    //     navigation: {
+    //         nextEl: '.swiper-button-next',
+    //         prevEl: '.swiper-button-prev',
+    //     },
+    // });
 
     // Populate Locations Options/Filtering:
     function populateLocationOptions() {
@@ -709,67 +779,242 @@ $(document).ready(function () {
                 </div>
             `;
             products.innerHTML += propertyHtml;
-            // Add event listener for all 'Book now' buttons
-            document.querySelectorAll('.book-now-btn').forEach(button => {
-                button.addEventListener('click', function () {
-                    fullpage_api.moveTo(1, 1); // slide 2
-                });
+        });
+        // Reinitialize Swiper after updating the DOM
+        const swipers = document.querySelectorAll('.swiper');
+        swipers.forEach(swiperEl => {
+            new Swiper(swiperEl, {
+                direction: 'horizontal',
+                pagination: {
+                    el: '.swiper-pagination',
+                    clickable: true,
+                },
+                // If we need pagination
+                pagination: {
+                    el: '.swiper-pagination',
+                    clickable: true,
+                },
+
+                // Navigation arrows
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
+                },
+            })
+        });
+        // Add event listener for all 'Book now' buttons
+        document.querySelectorAll('.book-now-btn').forEach(button => {
+            button.addEventListener('click', function () {
+                const propertyId = $(this).data('id');
+                const property = properties.find(p => p.id === propertyId);
+                // Ensure you have logic here to display property details
+                // For example: populateSelectResult(property);
+                fullpage_api.moveTo(1, 1); // slide 2
+            });
+        });
+
+        function populateSelectResult(propertyId) {
+            const preview = $('#PropertyCardPreview');
+            preview.empty();
+            const previewProperty = properties.find(property => property.id === propertyId);
+            if (!previewProperty) {
+                console.log('Property not found', propertyId);
+                return;
+            }
+            preview.append(`
+                <div id="preview-${previewProperty.id}" class="property-card-preview">
+                    <a id="backToMain" class="back-btn primary-button">
+                        <img src="../images/backarrow.svg">
+                        <p>Back</p>
+                    </a>
+
+                    <div class="property-header">
+                        <div class="image-gallery" id="image-gallery-container">
+                            <div class="thumbnails" id="thumbnails-container">
+                                ${previewProperty.images.map(image => `<img class="thumbnail" src="${image}" alt="${previewProperty.name}">`).join('')}
+                            </div>
+                            <div class="main-image-container" id="main-image-container">
+                                <img class="main-image" id="main-image" src="${previewProperty.images[0]}" alt="Main Image">
+                            </div>
+                        </div>
+                        <div class="property-amenities">
+                            <div class="amenity">
+                                <i class="fa-solid fa-bed"></i>
+                                <p>${previewProperty.bedrooms}</p>
+                            </div>
+                            <div class="amenity">
+                                <i class="fa-solid fa-bath"></i>
+                                <p>${previewProperty.bathrooms}</p>
+                            </div>
+                            <div class="amenity">
+                                <i class="fa-solid fa-people-group"></i>
+                                <p>${previewProperty.minGuests}-${previewProperty.maxGuests}</p>
+                            </div>
+                            <div class="amenity">
+                                <i class="fa-solid fa-star"></i>
+                                <p>${previewProperty.rating}</p>
+                            </div>
+                            <div class="amenity">
+                                <i class="fa-solid fa-house"></i>
+                                <p>${previewProperty.houseType}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="main-property-details">
+                        <div class="property-header-titles">
+                            <div class="main-titles">
+                                <h2>${previewProperty.name}</h2>
+                                <h2>$${previewProperty.price}</h2>
+                            </div>
+                            <div class="sub-titles">
+                                <h6>${previewProperty.location}, ${previewProperty.address}</h6>
+                                <h6>Per night</h6>
+                            </div>
+                        </div>
+                        <div class="property-content">
+                            <div class="property-text">
+                                <p>${previewProperty.description}<br><br>${previewProperty.bio}</p>
+                                <div class="buttons">
+                                    <a href="#meals" class="meals-btn primary-button" data-id="${previewProperty.id}">
+                                        <p>Add a meal</p>
+                                    </a>
+                                    <a id="moveToDetails" class="book-now-btn primary-button" data-id="${previewProperty.id}">
+                                        <p>Book now</p>
+                                    </a>
+                                </div>
+                            </div>
+                            <div id="map"></div>
+                        </div>
+                    </div>
+                </div>
+                <div id="meals" class="meal-section">
+                    <h2>Food & Drink</h2>
+                    <p class="meal-titles">Pre-order food and drink for your stay, ready upon arrival</p>
+                    <div class="meal-boxes">
+                        <div id="food-options" class="food-options">
+                        </div>
+                        <div class="food-options food-cart">
+                            <h2>Menu cart</h2>
+                            <p>Ordering options will also be available during your stay</p>
+                        </div>
+                    </div>
+                </div>
+            `);
+            $("#backToMain").click(function () {
+                fullpage_api.moveTo(1, 0);
+            });
+            $("#backToPreview").click(function () {
+                fullpage_api.moveTo(1, 1);
+            });
+            $("#backToDetails").click(function () {
+                fullpage_api.moveTo(1, 2);
+            });
+            $("#backToPayment").click(function () {
+                fullpage_api.moveTo(1, 3);
+            });
+            $("#moveToDetails").click(function () {
+                fullpage_api.moveTo(1, 2);
+            });
+            $("#moveToPayment").click(function () {
+                fullpage_api.moveTo(1, 3);
+            });
+            $("#moveToSummary").click(function () {
+                fullpage_api.moveTo(1, 4);
+            });
+            $("#moveToRecipt").click(function () {
+                fullpage_api.moveTo(1, 5);
             });
 
-            function populateSelectResult(propertyPreview) {
-                const preview = $('#PropertyCardPreview');
-                preview.empty();
-                const previewProperty = properties.find(property => property.id === propertyPreview);
-                if (!previewProperty) {
-                    console.log('not found', propertyPreview);
-                    return;
-                }
-                preview.append(`
-                    <div id="preview-${property.id}" class="previewTest">
-                        <p>is it wokring yet?</p>
-                        <p>${property.name}</p>
-                        <img src="${property.images}">
+
+            // Function to populate food options
+            function populateFoodOptions() {
+                const foodOptionsDiv = $('#food-options');
+                foodOptionsDiv.empty(); // Clear any existing content
+
+                Object.keys(menuOptions).forEach(category => {
+                    const categoryHeader = `<h3>${category.charAt(0).toUpperCase() + category.slice(1)}</h3>`;
+                    foodOptionsDiv.append(categoryHeader);
+
+                    menuOptions[category].forEach(item => {
+                        const itemHTML = `
+                    <div class="menu-item">
+                        <label>
+                            <input type="checkbox" class="mealType" value="meal-${item.id}">
+                            <p>${item.description}</p>
+                            <p>$${item.price.toFixed(2)}</p>
+                        </label>
                     </div>
-                `);
-            }
-
-            function previewHandlers() {
-                $('.book-now-btn').click(function (event) {
-                    console.log("CLICKED");
-                    const value = $(this).data('id');
-                    console.log(value);
-                    var buttonId = $(this).attr('id');
-                    $('#previewContainer').removeAttr('class').addClass(buttonId);
-                    $('body').addClass('preview-active');
-                    populateSelectResult(value);
+                `;
+                        foodOptionsDiv.append(itemHTML);
+                    });
                 });
-            
             }
-            // Function to move to the next slide (you might already have this function)
-            function moveTo(x, y) {
-                // Your existing moveTo function implementation
+
+            populateFoodOptions();
+            // MapBox Init:
+            mapboxgl.accessToken = 'pk.eyJ1IjoiY2lhcmFuc2xvdyIsImEiOiJjbHY0ZW91YnYwOGV3MmlwOGQ5b3l3a3J3In0.EFWZEAWA13ehFAw5jdLqJA';
+            let map = new mapboxgl.Map({
+                container: 'map',
+                style: 'mapbox://styles/mapbox/streets-v11', // style URL
+                center: [175.52223763296442, -39.332562526208825], // starting position [lng, lat]
+                zoom: 5 // starting zoom
+            });
+            // Set map container dimensions to match its parent
+            map.on('load', function () {
+                map.resize();
+            });
+
+            function initialiseMap(longitude, latitude) {
+                map = new mapboxgl.Map({
+                    container: 'map',
+                    style: 'mapbox://styles/mapbox/streets-v11',
+                    center: [longitude, latitude],
+                    zoom: 13
+                });
             }
-            previewHandlers();
+            initialiseMap(previewProperty.longitude, previewProperty.latitude);
+            // Add event listeners to thumbnails
+            const thumbnails = document.querySelectorAll(".thumbnail");
+            const mainImage = document.getElementById("main-image");
 
+            thumbnails.forEach(thumbnail => {
+                thumbnail.addEventListener("click", () => {
+                    mainImage.src = thumbnail.src;
+                });
+            });
+        }
+        document.querySelectorAll('.property-card').forEach(card => {
+            card.addEventListener('click', function () {
+                const propertyId = $(this).find('.book-now-btn').data('id');
+                populateSelectResult(propertyId);
+            });
         });
-
-        // Reinitialize Swiper for new content
-        swiper = new Swiper('.swiper', {
-            direction: 'horizontal',
-            pagination: {
-                el: '.swiper-pagination',
-                clickable: true,
-            },
-            navigation: {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
-            },
-        });
-
-        // Rebuild Fullpage to see the new slides
-        fullpage_api.reBuild();
     }
 
+    // Rebuild Fullpage to see the new slides
+    fullpage_api.reBuild();
+
+});
+
+// --------******* SWIPER JS ******-------
+
+// init Swiper
+const swiper = new Swiper('.swiper', {
+    // Optional parameters
+    direction: 'vertical',
+
+    // If we need pagination
+    pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+    },
+
+    // Navigation arrows
+    navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+    },
 });
 
 // populateProperties(properties);

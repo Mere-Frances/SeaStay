@@ -48,7 +48,7 @@
                 <div class="home-header">
                     <div class="header-design">
                         <h1>Discover Aotearoa's Coastal<span class="header-script">Gems</span></h1>
-                        <a class="primary-button">
+                        <a href="#myForm" class="primary-button">
                             <p>Start looking</p>
                         </a>
                     </div>
@@ -57,7 +57,7 @@
                     </div>
                 </div>
 
-                <form class="filter-container">
+                <form id="myForm" class="filter-container">
                     <div class="form-top">
                         <h2>Search</h2>
                         <div id="buildingTypeFilters" class="form-categories">
@@ -65,10 +65,6 @@
                             <label><input type="checkbox" class="buildingType" value="Motel"> Motel</label>
                             <label><input type="checkbox" class="buildingType" value="Hostel"> Hostel</label>
                             <label><input type="checkbox" class="buildingType" value="House"> House</label>
-                            <!-- <option valie="hotel" id="hotels" class="category-type" href="">Hotels</option>
-                            <option valie="hotel" id="hotels" class="category-type" href="">Motels</option>
-                            <option valie="hotel" id="hotels" class="category-type" href="">Hostels</option>
-                            <option valie="hotel" id="hotels" class="category-type" href="">Baches</option> -->
                         </div>
                     </div>
 
@@ -137,7 +133,6 @@
                                 <p>Guests</p>
                             </label>
                             <select name="guests" id="guests" class="full-width-select">
-                                <option value="">Number of guests</option>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>
@@ -169,7 +164,7 @@
                             <a id="seeMoreLink">More options</a>
                         </div>
 
-                        <div id="searchBtn" class="search-button">
+                        <div href="#products" id="searchBtn" class="search-button">
                             <i class="fa-solid fa-magnifying-glass"></i>
                         </div>
                     </div>
@@ -212,16 +207,381 @@
             <div class="slide">
                 <div id="PropertyCardPreview" class="BookNowPreview property-preview">
                     <div id="previewContainer" class="preview-container">
+                        <div id="image-gallery-container">
+                            <div id="thumbnails-container">
+                                <!-- Thumbnails will be dynamically added here -->
+                            </div>
+                            <div id="main-image-container">
+                                <img id="main-image" src="" alt="Main Image">
+                            </div>
+                        </div>
+                        <div id="map"></div>
                         <div id="previewGallery" class="preview-gallery"></div>
                     </div>
                 </div>
             </div>
 
+            <!-- Slide 3 - FILT<ERED CARD OUTPUT -->
+            <div class="slide">
+                <div class="booking-nav">
+                    <div class="booking-indicator section-one">
+                        <img src="./images/orangefish.png">
+                        <p class="complete">Details</p>
+                    </div>
+                    <div class="booking-indicator section-two">
+                        <span></span>
+                        <img src="./images/greyfish.png">
+                        <p>Payment</p>
+                    </div>
+                    <div class="booking-indicator section-three">
+                        <span></span>
+                        <img src="./images/greyfish.png">
+                        <p>Summary</p>
+                    </div>
+                    <div class="booking-indicator section-four">
+                        <span></span>
+                        <img src="./images/greyfish.png">
+                        <p>Receipt</p>
+                    </div>
+                </div>
+
+                <div class="booking-container">
+                    <a id="backToPreview" class="back-btn primary-button">
+                        <p>Back</p>
+                    </a>
+                    <div class="booking-details">
+                        <div class="booking-form">
+                            <h2>Add your details</h2>
+                            <form action="#" method="post">
+                                <div class="form-row">
+                                    <label for="first-name">First Name</label>
+                                    <input type="text" id="first-name" name="first-name" required>
+                                    <label for="last-name">Last Name</label>
+                                    <input type="text" id="last-name" name="last-name" required>
+                                </div>
+                                <div class="form-row full-width">
+                                    <label for="address">Address</label>
+                                    <input type="text" id="address" name="address" required>
+                                </div>
+                                <div class="form-row full-width">
+                                    <label for="email">Email</label>
+                                    <input type="email" id="email" name="email" required>
+                                </div>
+                                <div class="form-row full-width">
+                                    <label for="phone">Phone Number</label>
+                                    <input type="tel" id="phone" name="phone" required>
+                                </div>
+                                <div class="bottom-row form-row full-width">
+                                    <a id="moveToPayment" class="book-now-btn primary-button"
+                                        data-id="${previewProperty.id}">
+                                        <p>Next</p>
+                                    </a>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="booking-preview">
+                            <div class="booking-preview--container">
+                                <div class="booking-preview--section">
+                                    <h3>Your items</h3>
+                                    <span></span>
+                                    <div id="selectedProductPrint" class="selected-product--print">
+                                    </div>
+                                </div>
+                                <div class="booking-preview--section">
+                                    <h3>Additional items</h3>
+                                    <span></span>
+                                    <div id="selectedMealsPrint" class="selected-meals--print"></div>
+                                </div>
+                                <div class="booking-preview--section">
+                                    <h3>Cart summary</h3>
+                                    <span></span>
+                                    <div class="cart-details">
+                                        <p>Cleaning fee</p>
+                                        <p>$9.99</p>
+                                    </div>
+                                    <div class="cart-details">
+                                        <p>Service fee</p>
+                                        <p>$4.99</p>
+                                    </div>
+                                    <div id="totalPrice" class="total-price"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end of slide 3 -->
+
+            <!-- Slide 4-->
+            <div class="slide">
+                <div class="booking-nav">
+                    <div class="booking-indicator section-one">
+                        <img src="./images/orangefish.png">
+                        <p class="complete">Details</p>
+                    </div>
+                    <div class="booking-indicator section-two">
+                        <span class="complete-span"></span>
+                        <img src="./images/orangefish.png">
+                        <p class="complete">Payment</p>
+                    </div>
+                    <div class="booking-indicator section-three">
+                        <span></span>
+                        <img src="./images/greyfish.png">
+                        <p>Summary</p>
+                    </div>
+                    <div class="booking-indicator section-four">
+                        <span></span>
+                        <img src="./images/greyfish.png">
+                        <p>Receipt</p>
+                    </div>
+                </div>
+
+                <div class="booking-container">
+                    <a id="backToDetails" class="back-btn primary-button">
+                        <p>Back</p>
+                    </a> 
+                    <div class="booking-details">
+                        <div class="booking-form">
+                            <h2>Payment</h2>
+                            <form action="#" method="post">
+                                <div class="form-row">
+                                    <label for="card-name">Name on card</label>
+                                    <input type="text" id="card-name" name="card-name" required>
+                                </div>
+                                <div class="form-row full-width">
+                                    <label for="card-number">Card number</label>
+                                    <input type="text" id="card-number" name="card-number" required>
+                                </div>
+                                <div class="payment-type">
+                                    <h6>We accept:</h6>
+                                    <img class="pay" src="./images/mastercard.png">
+                                    <img class="pay" src="./images/visa.png">
+                                    <img class="pay" src="./images/paypal.png">
+                                    <img class="pay" src="./images/applepay.png">
+                                    <img class="pay" src="./images/googlepay.png">
+                                    <img class="pay" src="./images/amazonpay.png">
+                                </div>
+                                <div class="form-row">
+                                    <label for="expiry">Expiry date</label>
+                                    <input type="text" id="expiry" name="expiry" required>
+                                    <label for="cvv">CVV</label>
+                                    <input type="text" id="cvv" name="cvv" required>
+                                </div>
+                                <div class="payment-alternatives">
+                                    <h6>Or pay with:</h6>
+                                    <div class="payment-alternative--icons">
+                                        <img src="./images/paypal.png">
+                                        <img src="./images/applepay.png">
+                                        <img src="./images/googlepay.png">
+                                    </div>
+                                </div>
+                                <div class="bottom-row form-row full-width">
+                                    <a id="moveToSummary" class="book-now-btn primary-button"
+                                        data-id="${previewProperty.id}">
+                                        <p>Next</p>
+                                    </a>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="booking-preview">
+                            <div class="booking-preview--container">
+                                <div class="booking-preview--section">
+                                    <h3>Your items</h3>
+                                    <span></span>
+                                    <div id="selectedProductPrint" class="selected-product--print"></div>
+                                </div>
+                                <div class="booking-preview--section">
+                                    <h3>Additional items</h3>
+                                    <span></span>
+                                    <div id="selectedMealsPrint" class="selected-meals--print"></div>
+                                </div>
+                                <div class="booking-preview--section">
+                                    <h3>Cart summary</h3>
+                                    <span></span>
+                                    <div class="cart-details">
+                                        <p>Cleaning fee</p>
+                                        <p>$9.99</p>
+                                    </div>
+                                    <div class="cart-details">
+                                        <p>Service fee</p>
+                                        <p>$4.99</p>
+                                    </div>
+                                    <div id="totalPrice" class="total-price"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end of slide 4 -->
+
+            <!-- Slide 5 -->
+            <div class="slide">
+                <div class="booking-nav">
+                    <div class="booking-indicator section-one">
+                        <img src="./images/orangefish.png">
+                        <p class="complete">Details</p>
+                    </div>
+                    <div class="booking-indicator section-two">
+                        <span class="complete-span"></span>
+                        <img src="./images/orangefish.png">
+                        <p class="complete">Payment</p>
+                    </div>
+                    <div class="booking-indicator section-three">
+                        <span class="complete-span"></span>
+                        <img src="./images/orangefish.png">
+                        <p class="complete">Summary</p>
+                    </div>
+                    <div class="booking-indicator section-four">
+                        <span></span>
+                        <img src="./images/greyfish.png">
+                        <p>Receipt</p>
+                    </div>
+                </div>
+
+                <div class="booking-container">
+                    <a id="backToPayment" class="back-btn primary-button">
+                        <p>Back</p>
+                    </a>
+                    <div class="booking-details">
+                        <div class="booking-form">
+                            <h2>Confirm your details</h2>
+                            <div class="details-summary">
+                                <div class="details-review">
+                                    <h3>Your Details</h3>
+                                    <span></span>
+                                    <div id="detailsReview" ></div>
+                                </div>
+                                <div class="payment-review">
+                                    <h3>Payment</h3>
+                                    <span></span>
+                                    <div id="paymentReview"></div>
+                                </div>
+                                <div class="bottom-row form-row full-width">
+                                    <a id="moveToReceipt" class="book-now-btn primary-button"
+                                        data-id="${previewProperty.id}">
+                                        <p>Confirm</p>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="booking-preview">
+                            <div class="booking-preview--container">
+                                <div class="booking-preview--section">
+                                    <h3>Your items</h3>
+                                    <span></span>
+                                    <div id="selectedProductPrint" class="selected-product--print"></div>
+                                </div>
+                                <div class="booking-preview--section">
+                                    <h3>Additional items</h3>
+                                    <span></span>
+                                    <div id="selectedMealsPrint" class="selected-meals--print"></div>
+                                </div>
+                                <div class="booking-preview--section">
+                                    <h3>Cart summary</h3>
+                                    <span></span>
+                                    <div class="cart-details">
+                                        <p>Cleaning fee</p>
+                                        <p>$9.99</p>
+                                    </div>
+                                    <div class="cart-details">
+                                        <p>Service fee</p>
+                                        <p>$4.99</p>
+                                    </div>
+                                    <div id="totalPrice" class="total-price"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end of slide 5 -->
+
+            
+            <!-- Slide 6 -->
+            <div class="slide">
+                <div class="booking-nav">
+                    <div class="booking-indicator section-one">
+                        <img src="./images/orangefish.png">
+                        <p class="complete">Details</p>
+                    </div>
+                    <div class="booking-indicator section-two">
+                        <span class="complete-span"></span>
+                        <img src="./images/orangefish.png">
+                        <p class="complete">Payment</p>
+                    </div>
+                    <div class="booking-indicator section-three">
+                        <span class="complete-span"></span>
+                        <img src="./images/orangefish.png">
+                        <p class="complete">Summary</p>
+                    </div>
+                    <div class="booking-indicator section-four">
+                        <span class="complete-span"></span>
+                        <img src="./images/orangefish.png">
+                        <p class="complete">Receipt</p>
+                    </div>
+                </div>
+
+                <div class="booking-container">
+                    <a id="backToPayment" class="back-btn primary-button">
+                        <p>Back</p>
+                    </a>
+                    <div class="booking-details">
+                        <div class="booking-form">
+                            <h2>Confirm your details</h2>
+                            <div class="details-summary">
+                                <div class="details-review">
+                                    <h3>Your Details</h3>
+                                    <span></span>
+                                    <div id="detailsReview" ></div>
+                                </div>
+                                <div class="payment-review">
+                                    <h3>Payment</h3>
+                                    <span></span>
+                                    <div id="paymentReview"></div>
+                                </div>
+                                <div class="bottom-row form-row full-width">
+                                    <a id="moveToReceipt" class="book-now-btn primary-button"
+                                        data-id="${previewProperty.id}">
+                                        <p>Confirm</p>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="booking-preview">
+                            <div class="booking-preview--container">
+                                <div class="booking-preview--section">
+                                    <h3>Your items</h3>
+                                    <span></span>
+                                    <div id="selectedProductPrint" class="selected-product--print"></div>
+                                </div>
+                                <div class="booking-preview--section">
+                                    <h3>Additional items</h3>
+                                    <span></span>
+                                    <div id="selectedMealsPrint" class="selected-meals--print"></div>
+                                </div>
+                                <div class="booking-preview--section">
+                                    <h3>Cart summary</h3>
+                                    <span></span>
+                                    <div class="cart-details">
+                                        <p>Cleaning fee</p>
+                                        <p>$9.99</p>
+                                    </div>
+                                    <div class="cart-details">
+                                        <p>Service fee</p>
+                                        <p>$4.99</p>
+                                    </div>
+                                    <div id="totalPrice" class="total-price"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end of slide 6 -->
         </div>
     </div>
-    <div class="section section-2">section 2</div>
-    <div class="section section-3">section 3</div>
-    <div class="section section-4">section 4</div>
+
 
     <!-- Jquery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
@@ -233,10 +593,10 @@
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <!-- Swiper JS -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    <!-- MapBox -->
-    <script src='https://api.mapbox.com/mapbox-gl-js/v2.7.0/mapbox-gl.js'></script>
     <!-- font awesome icons -->
     <script src="https://kit.fontawesome.com/40be05a600.js" crossorigin="anonymous"></script>
+    <!-- MapBox -->
+    <script src='https://api.mapbox.com/mapbox-gl-js/v2.7.0/mapbox-gl.js'></script>
     <!-- Custom JS -->
     <script src="./js/script.min.js"></script>
 </body>
