@@ -358,7 +358,7 @@ const properties = [{
         images: [
             '../images/houses/bayplentyhouse1.webp',
             '../images/houses/bayplentyhouse2.webp'
-        ],        
+        ],
         bio: 'Oceanview Hideaway is a charming house located in the beautiful Papamoa Beach area of Bay of Plenty. With a rating of 4.6, this property is perfect for families or small groups, offering 2 bedrooms and 3 bathrooms. Guests can enjoy stunning ocean views and a serene atmosphere. The house can accommodate up to 4 guests and provides all the necessary amenities for a comfortable stay. Its proximity to the beach makes it an ideal spot for those looking to relax and unwind by the sea.',
     },
     {
@@ -742,7 +742,7 @@ $(document).ready(function () {
                         <div class="image-hover--swipe">
                             <div class="image-hover--container">
                                 <img class="pointer-slide" src="../images/pointer.png">
-                                <p>Drag to see more</p>
+                                <p>Drag me</p>
                             </div>
                         </div>
                     </div>
@@ -789,26 +789,18 @@ $(document).ready(function () {
                     el: '.swiper-pagination',
                     clickable: true,
                 },
-                // If we need pagination
-                pagination: {
-                    el: '.swiper-pagination',
-                    clickable: true,
-                },
-
                 // Navigation arrows
                 navigation: {
                     nextEl: '.swiper-button-next',
                     prevEl: '.swiper-button-prev',
                 },
-            })
+            });
         });
         // Add event listener for all 'Book now' buttons
         document.querySelectorAll('.book-now-btn').forEach(button => {
             button.addEventListener('click', function () {
                 const propertyId = $(this).data('id');
                 const property = properties.find(p => p.id === propertyId);
-                // Ensure you have logic here to display property details
-                // For example: populateSelectResult(property);
                 fullpage_api.moveTo(1, 1); // slide 2
             });
         });
@@ -875,6 +867,20 @@ $(document).ready(function () {
                         <div class="property-content">
                             <div class="property-text">
                                 <p>${previewProperty.description}<br><br>${previewProperty.bio}</p>
+                                <div class="counters">
+                                    <div class="counter">
+                                        <label for="nights">Nights:</label>
+                                        <button class="decrement" data-type="nights">-</button>
+                                        <input type="number" id="nights" min="${previewProperty.minNights}" max="${previewProperty.maxNights}" value="${previewProperty.minNights}">
+                                        <button class="increment" data-type="nights">+</button>
+                                    </div>
+                                    <div class="counter">
+                                        <label for="guests">Guests:</label>
+                                        <button class="decrement" data-type="guests">-</button>
+                                        <input type="number" id="guests" min="${previewProperty.minGuests}" max="${previewProperty.maxGuests}" value="${previewProperty.minGuests}">
+                                        <button class="increment" data-type="guests">+</button>
+                                    </div>
+                                </div>
                                 <div class="buttons">
                                     <a href="#meals" class="meals-btn primary-button" data-id="${previewProperty.id}">
                                         <p>Add a meal</p>
@@ -894,13 +900,66 @@ $(document).ready(function () {
                     <div class="meal-boxes">
                         <div id="food-options" class="food-options">
                         </div>
-                        <div class="food-options food-cart">
+                        <div id="foodCart" class="food-options food-cart">
                             <h2>Menu cart</h2>
                             <p>Ordering options will also be available during your stay</p>
                         </div>
                     </div>
                 </div>
             `);
+
+            // Event listeners for increment and decrement buttons
+            $('.increment').on('click', function () {
+                const type = $(this).data('type');
+                const input = $(`#${type}`);
+                let currentValue = parseInt(input.val(), 10);
+                const max = parseInt(input.attr('max'), 10);
+                if (currentValue < max) {
+                    input.val(currentValue + 1);
+                }
+            });
+
+            $('.decrement').on('click', function () {
+                const type = $(this).data('type');
+                const input = $(`#${type}`);
+                let currentValue = parseInt(input.val(), 10);
+                const min = parseInt(input.attr('min'), 10);
+                if (currentValue > min) {
+                    input.val(currentValue - 1);
+                }
+            });
+
+            // Function to populate the selected product print
+            function populateSelectedProductPrint(property, nights, guests) {
+                const selectedProductPrint = $('#selectedProductPrint');
+                selectedProductPrint.empty();
+                selectedProductPrint.append(`
+                <div class="selected-property">
+                    <div class="booking-text">
+                        <h6>${property.name}</h6>
+                        <h6>${property.houseType}</h6>
+                        <h6>${nights} Nights</h6>
+                        <h6>${guests} Guests</h6>
+                        <h6>$${property.price} per night</h6>
+                    </div>
+                    <img class="booking-img" src="${property.images[0]}" alt="${property.name}">
+                </div>
+                `);
+            }
+
+            $('#moveToDetails').on('click', function() {
+                const propertyId = $(this).data('id');
+                const property = properties.find(property => property.id === propertyId);
+                const nights = $('#nights').val();
+                const guests = $('#guests').val();
+            
+                if (property) {
+                    populateSelectedProductPrint(property, nights, guests);
+                } else {
+                    console.log('Property not found', propertyId);
+                }
+            });
+
             $("#backToMain").click(function () {
                 fullpage_api.moveTo(1, 0);
             });
@@ -916,16 +975,25 @@ $(document).ready(function () {
             $("#moveToDetails").click(function () {
                 fullpage_api.moveTo(1, 2);
             });
-            $("#moveToPayment").click(function () {
-                fullpage_api.moveTo(1, 3);
-            });
-            $("#moveToSummary").click(function () {
-                fullpage_api.moveTo(1, 4);
-            });
-            $("#moveToRecipt").click(function () {
-                fullpage_api.moveTo(1, 5);
-            });
 
+            $("#moveToPayment").click(function () {
+                $("#detailsSection").css("display", "none");
+                $("#paymentSection").css("display", "block");
+                // fullpage_api.moveTo(1, 3);
+            });
+            $("#moveToReview").click(function () {
+                $("#detailsSection").css("display", "none");
+                $("#paymentSection").css("display", "none");
+                $("#reviewSection").css("display", "block");
+                // fullpage_api.moveTo(1, 3);
+            });
+            $("#moveToReceipt").click(function () {
+                $("#detailsSection").css("display", "none");
+                $("#paymentSection").css("display", "none");
+                $("#reviewSection").css("display", "none");
+                // $("#").css("display", "block");
+                // fullpage_api.moveTo(1, 3);
+            });
 
             // Function to populate food options
             function populateFoodOptions() {
@@ -940,14 +1008,45 @@ $(document).ready(function () {
                         const itemHTML = `
                     <div class="menu-item">
                         <label>
-                            <input type="checkbox" class="mealType" value="meal-${item.id}">
+                            <input id="foodAdd" type="checkbox" class="mealType" value="meal-${item.id}">
                             <p>${item.description}</p>
                             <p>$${item.price.toFixed(2)}</p>
                         </label>
                     </div>
-                `;
+                    `;
                         foodOptionsDiv.append(itemHTML);
                     });
+                });
+                $('.mealType').change(function () {
+                    const detailsFoodCart = $('#selectedMealsPrint');
+                    const foodCartDiv = $('#foodCart');
+                    const checkbox = $(this);
+                    const itemDescription = checkbox.siblings('p').first().text();
+                    const itemPrice = checkbox.siblings('p').last().text();
+
+                    if (checkbox.is(':checked')) {
+                        const cartItemHTML = `
+                        <div class="cart-meal menu-item" id="cart-${checkbox.val()}">
+                            <p>${itemDescription}</p>
+                            <p>${itemPrice}</p>
+                            <div id="removeMeal" class="removeMeal">
+                                <i class="fa-solid fa-minus"></i>
+                            </div>
+                        </div>
+                        `;
+                        detailsFoodCart.append(cartItemHTML);
+                        foodCartDiv.append(cartItemHTML);
+
+                        // Add event listener for remove button
+                        $(`#cart-${checkbox.val()} #removeMeal`).click(function () {
+                            $(`#cart-${checkbox.val()}`).remove();
+                            $(`#selectedMealsPrint-${checkbox.val()}`).remove();
+                            checkbox.prop('checked', false); // Uncheck the corresponding checkbox
+                        });
+                    } else {
+                        $(`#cart-${checkbox.val()}`).remove();
+                        $(`#print-${checkbox.val()}`).remove();
+                    }
                 });
             }
 

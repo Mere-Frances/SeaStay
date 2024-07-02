@@ -4,13 +4,55 @@ $primary-color: #5A82B8;
 $secondary-color: #FF842A;
 $primary-background: #FFFFF5;
 $secondary-background: #ebebeb;
-
 $body-text-color: #1D1D1D;
-
 $rounded: 50px;
+$transition-time: 0.1s linear;
+
+// Mixin for Flex Center
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+body {
+  background-color: $primary-background;
+  height: 500vh;
+  font-family: 'Inter', sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+
+  h2,
+  h3,
+  h6,
+  p {
+    color: $body-text-color;
+  }
+
+  h2 {
+    font-size: 3rem;
+    font-weight: 600;
+  }
+
+  h3 {
+    font-size: 1.5rem;
+  }
+
+  h6 {
+    font-size: 1rem;
+    opacity: 0.5;
+  }
+
+  p {
+    font-size: 1.3rem;
+    font-weight: 600;
+  }
+}
 
 .primary-button {
-  display: flex;
+  @include flex-center;
   flex-wrap: wrap;
   height: 50px;
   max-width: 190px;
@@ -19,50 +61,17 @@ $rounded: 50px;
   min-width: 8vw;
   background-color: $primary-color;
   border-radius: $rounded;
-  transition: all .1s linear;
+  transition: all $transition-time;
   cursor: pointer;
-  scroll-behavior: smooth;
   text-decoration: none;
-  justify-content: center;
-  align-items: center;
 
   p {
     color: $primary-background;
   }
-}
 
-.primary-button:hover {
-  box-shadow: inset 5px 5px 20px #345583, inset -5px -5px 20px #89ACDB;
-  transition: all .1s linear;
-}
-
-body {
-  background-color: $primary-background;
-  height: 500vh;
-  font-family: Inter;
-}
-
-h2 {
-  color: $body-text-color;
-  font-size: 3rem;
-  font-weight: 600;
-}
-
-h3 {
-  color: $body-text-color;
-  font-size: 1.5rem;
-}
-
-h6 {
-  color: $body-text-color;
-  font-size: 1rem;
-  opacity: 50%;
-}
-
-p {
-  color: $body-text-color;
-  font-size: 1.3rem;
-  font-weight: 600;
+  &:hover {
+    box-shadow: inset 5px 5px 20px #345583, inset -5px -5px 20px #89ACDB;
+  }
 }
 
 * {
@@ -497,36 +506,37 @@ label {
       justify-content: center;
       align-items: center;
       flex-direction: column;
-      height: 100%;
-      padding: 40px 60px;
-      width: 100%;
+      height: 40%;
+      padding: 10px 20px;
+      width: 30%;
       z-index: 50;
       opacity: 0;
       position: relative;
-      bottom: 170%;
+      bottom: 40%;
 
       .image-hover--container {
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: flex-end;
-        background: #3434348a;
+        background: rgba(52, 52, 52, .5411764706);
         text-align: center;
         position: relative;
         overflow: hidden;
         height: 90%;
-        width: 60%;
+        width: 80%;
         padding: 10px;
         border-radius: 20px;
 
         p {
           color: $primary-background;
+          font-size: .8rem;
         }
 
         .pointer-slide {
-          height: 100px;
+          height: 50px;
           position: absolute;
-          top: 5%;
+          bottom: 30%;
           left: 50%;
           transition: all 0.8s ease-in-out;
           transition-delay: 250ms;
@@ -535,7 +545,9 @@ label {
     }
   }
 
-  .image-content:hover>.image-hover--swipe, .image-hover--container, .pointer-slide {
+  .image-content:hover>.image-hover--swipe,
+  .image-hover--container,
+  .pointer-slide {
     opacity: 1;
     transition: opacity 0.2s ease-in-out;
   }
@@ -718,12 +730,43 @@ label {
 
           .meals-btn {
             background-color: $secondary-color;
+
+            &:hover {
+              box-shadow: none;
+            }
           }
         }
       }
 
 
     }
+  }
+}
+
+#paymentSection {
+  display: none;
+}
+
+#reviewSection {
+  display: none;
+}
+
+.selected-property {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 5%;
+  .booking-text{
+    display: flex;
+    flex-direction: column;
+    text-align: start;
+    justify-content: space-evenly;
+    gap: 10px;
+  }
+  .booking-img{
+    height: 200px;
+    border-radius: 25px;
   }
 }
 
@@ -756,11 +799,15 @@ label {
     padding: 2rem;
     gap: 2rem;
 
-    .menu-item {
+    .menu-item,
+    .cart-meal {
+      display: flex;
+      text-align: start;
       width: 100%;
       padding: 2rem 1.5rem;
       background: white;
       border-radius: 20px 20px 0 0;
+      max-height: 150px;
 
       label {
         display: flex;
@@ -772,6 +819,34 @@ label {
         input {
           height: 20px;
           width: 20px;
+        }
+      }
+    }
+
+    .cart-meal {
+      display: flex;
+      text-align: start;
+      justify-content: space-between;
+      width: 100%;
+      padding: 2rem 1.5rem;
+      background: #fff;
+      border-radius: 20px 20px 0 0;
+      max-height: 150px;
+
+      .removeMeal {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        height: 50px;
+        top: 90%;
+        left: 5%;
+        width: 50px;
+        border-radius: 50%;
+        background: $secondary-color;
+
+        i {
+          color: $primary-background;
         }
       }
     }
@@ -832,6 +907,7 @@ label {
 .booking-container {
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
   width: 100%;
   align-items: flex-start;
   padding: 5rem 5rem;
@@ -930,7 +1006,7 @@ label {
   .booking-preview {
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     width: 50%;
     padding: 2rem;
 
