@@ -298,6 +298,12 @@ form {
     padding: 20px 50px 20px 0;
     border-right: 3px solid $secondary-background;
 
+    .filterText, #seeMoreText{
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: $body-text-color;
+    }
+
     input,
     select,
     a {
@@ -745,6 +751,10 @@ label {
 }
 
 #reviewSection {
+  display: none;
+}
+
+#detailsBookingNav, .paymentBookingNav, .summaryBookingNav {
   display: none;
 }
 

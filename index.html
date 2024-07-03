@@ -75,8 +75,8 @@
                     <div class="form-filters">
                         <!-- location -->
                         <div class="filter">
-                            <label for="location">
-                                <p>Location</p>
+                            <label class="filterText" for="location">
+                                Location
                             </label>
                             <select name="location" id="location" class="full-width-select" required>
                                 <option value="">Select a city</option>
@@ -85,8 +85,8 @@
 
                         <!-- start date -->
                         <div class="filter">
-                            <label for="startDate">
-                                <p>Check In</p>
+                            <label class="filterText" for="startDate">
+                                Check In
                             </label>
                             <input type="text" id="startDate" placeholder="Select a date" name="startDate"
                                 class="full-width-select" required>
@@ -94,17 +94,17 @@
 
                         <!-- end date -->
                         <div class="filter">
-                            <label for="endDate">
-                                <p>Check Out</p>
+                            <label class="filterText" for="endDate">
+                                Check Out
                             </label>
                             <input type="text" id="endDate" placeholder="Select a date" name="endDate"
                                 class="full-width-select" required>
                         </div>
 
                         <!-- HIDDEN bedrooms -->
-                        <div id="hiddenFilter" class="filter hidden-filter">
-                            <label for="bedrooms">
-                                <p>Bedrooms</p>
+                        <div class="filter hidden-filter">
+                            <label class="filterText" for="bedrooms">
+                                Bedrooms
                             </label>
                             <select name="bedrooms" id="bedrooms" class="full-width-select">
                                 <option value="">Number of bedrooms</option>
@@ -118,9 +118,9 @@
                         </div>
 
                         <!-- HIDDEN bathrooms -->
-                        <div id="hiddenFilter" class="filter hidden-filter">
-                            <label for="bathrooms">
-                                <p>Bathrooms</p>
+                        <div class="filter hidden-filter">
+                            <label class="filterText" for="bathrooms">
+                                Bathrooms
                             </label>
                             <select name="bathrooms" id="bathrooms" class="full-width-select">
                                 <option value="">Number of bathrooms</option>
@@ -132,9 +132,9 @@
                         </div>
 
                         <!-- HIDDEN number of guests -->
-                        <div id="hiddenFilter" class="filter hidden-filter">
-                            <label for="guests">
-                                <p>Guests</p>
+                        <div class="filter hidden-filter">
+                            <label class="filterText" for="guests">
+                                Guests
                             </label>
                             <select name="guests" id="guests" class="full-width-select">
                                 <option value="1">1</option>
@@ -146,9 +146,9 @@
                         </div>
 
                         <!-- HIDDEN rating -->
-                        <div id="hiddenFilter" class="filter hidden-filter">
-                            <label for="rating">
-                                <p>Rating</p>
+                        <div class="filter hidden-filter">
+                            <label class="filterText" for="rating">
+                                Rating
                             </label>
                             <select name="rating" id="rating" class="full-width-select">
                                 <option value="">Guest rating</option>
@@ -161,13 +161,14 @@
                         </div>
                         <!-- See more options button -->
                         <div id="open" class="filter see-more-filter">
-                            <label for="">
-                                <p id="seeMoreText">More</p>
+                            <label id="seeMoreText">
+                                <input name="More">
+                                More
                             </label>
                             <a id="seeMoreLink">More options</a>
                         </div>
                         <!-- search button -->
-                        <div href="#products" id="searchBtn" class="search-button">
+                        <div id="searchBtn" class="search-button">
                             <i class="fa-solid fa-magnifying-glass"></i>
                         </div>
                     </div>
@@ -203,10 +204,6 @@
                         <!-- property preview gallery -->
                         <div id="image-gallery-container">
                             <div id="thumbnails-container">
-                                <!-- image thumbnails inside here -->
-                            </div>
-                            <div id="main-image-container">
-                                <img id="main-image" src="" alt="Main Image">
                             </div>
                         </div>
                         <!-- property map -->
@@ -220,29 +217,108 @@
             <!-- SLIDE 3 - BOOKING DETAILS -->
             <div class="slide">
                 <!-- booking progress bar -->
-                <div class="booking-nav">
+                <!-- DETAILS NAV -->
+                <div id="detailsBookingNav" class="booking-nav">
                     <!-- active progress indicator -->
                     <div class="booking-indicator section-one">
-                        <img src="./images/orangefish.png">
+                        <img src="./images/orangefish.png" alt="orange fish illustration">
                         <p class="complete">Details</p>
                     </div>
                     <!-- inactive progress indicator -->
                     <div class="booking-indicator section-two">
                         <span></span>
-                        <img src="./images/greyfish.png">
+                        <img src="./images/greyfish.png" alt="grey fish illustration">
                         <p>Payment</p>
                     </div>
                     <!-- inactive progress indicator -->
                     <div class="booking-indicator section-three">
                         <span></span>
-                        <img src="./images/greyfish.png">
+                        <img src="./images/greyfish.png" alt="grey fish illustration">
                         <p>Summary</p>
                     </div>
                     <!-- inactive progress indicator -->
                     <div class="booking-indicator section-four">
                         <span></span>
-                        <img src="./images/greyfish.png">
+                        <img src="./images/greyfish.png" alt="grey fish illustration">
                         <p>Receipt</p>
+                    </div>
+                </div>
+                <!-- PAYMENT NAV -->
+                <div id="paymentBookingNav" class="booking-nav">
+                    <!-- active progress indicator -->
+                    <div class="booking-indicator section-one">
+                        <img src="./images/orangefish.png" alt="orange fish illustration">
+                        <p class="complete">Details</p>
+                    </div>
+                    <!-- active progress indicator -->
+                    <div class="booking-indicator section-two">
+                        <span class="complete-span"></span>
+                        <img src="./images/orangefish.png" alt="orange fish illustration">
+                        <p class="complete">Payment</p>
+                    </div>
+                    <!-- inactive progress indicator -->
+                    <div class="booking-indicator section-three">
+                        <span></span>
+                        <img src="./images/greyfish.png" alt="grey fish illustration">
+                        <p>Summary</p>
+                    </div>
+                    <!-- inactive progress indicator -->
+                    <div class="booking-indicator section-four">
+                        <span></span>
+                        <img src="./images/greyfish.png" alt="grey fish illustration">
+                        <p>Receipt</p>
+                    </div>
+                </div>
+                <!-- SUMMARY NAV -->
+                <div id="summaryBookingNav" class="booking-nav">
+                    <!-- active progress indicator -->
+                    <div class="booking-indicator section-one">
+                        <img src="./images/orangefish.png" alt="orange fish illustration">
+                        <p class="complete">Details</p>
+                    </div>
+                    <!-- active progress indicator -->
+                    <div class="booking-indicator section-two">
+                        <span class="complete-span"></span>
+                        <img src="./images/orangefish.png" alt="orange fish illustration">
+                        <p class="complete">Payment</p>
+                    </div>
+                    <!-- active progress indicator -->
+                    <div class="booking-indicator section-three">
+                        <span class="complete-span"></span>
+                        <img src="./images/orangefish.png" alt="orange fish illustration">
+                        <p class="complete">Summary</p>
+                    </div>
+                    <!-- inactive progress indicator -->
+                    <div class="booking-indicator section-four">
+                        <span></span>
+                        <img src="./images/greyfish.png" alt="grey fish illustration">
+                        <p>Receipt</p>
+                    </div>
+                </div>
+                <!-- RECEIPT NAV -->
+                <div id="receiptBookingNav" class="booking-nav">
+                    <!-- active progress indicator -->
+                    <div class="booking-indicator section-one">
+                        <img src="./images/orangefish.png" alt="orange fish illustration">
+                        <p class="complete">Details</p>
+                    </div>
+                    <!-- active progress indicator -->
+                    <div class="booking-indicator section-two">
+                        <span class="complete-span"></span>
+                        <img src="./images/orangefish.png" alt="orange fish illustration">
+                        <p class="complete">Payment</p>
+                    </div>
+                    <!-- active progress indicator -->
+                    <div class="booking-indicator section-three">
+                        <span class="complete-span"></span>
+                        <img src="./images/orangefish.png" alt="orange fish illustration">
+                        <p class="complete">Summary</p>
+                    </div>
+                    <!-- active progress indicator -->
+                    <div class="booking-indicator section-four">
+                        <span class="complete-span"></span>
+                        <img src="./images/orangefish.png" alt="orange fish illustration">
+                        <p class="complete">Receipt</p>
                     </div>
                 </div>
 
@@ -307,12 +383,12 @@
                                 <!-- types of payment options -->
                                 <div class="payment-type">
                                     <h6>We accept:</h6>
-                                    <img class="pay" src="./images/mastercard.png">
-                                    <img class="pay" src="./images/visa.png">
-                                    <img class="pay" src="./images/paypal.png">
-                                    <img class="pay" src="./images/applepay.png">
-                                    <img class="pay" src="./images/googlepay.png">
-                                    <img class="pay" src="./images/amazonpay.png">
+                                    <img class="pay" src="./images/mastercard.png" alt="mastercard payment type icon">
+                                    <img class="pay" src="./images/visa.png" alt="visa payment type icon">
+                                    <img class="pay" src="./images/paypal.png" alt="paypal payment type icon">
+                                    <img class="pay" src="./images/applepay.png" alt="apple pay payment type icon">
+                                    <img class="pay" src="./images/googlepay.png" alt="gogle pay payment type icon">
+                                    <img class="pay" src="./images/amazonpay.png" alt="amazon pay payment type icon">
                                 </div>
                                 <!-- card expiry & CVV -->
                                 <div class="form-row">
@@ -325,9 +401,9 @@
                                 <div class="payment-alternatives">
                                     <h6>Or pay with:</h6>
                                     <div class="payment-alternative--icons">
-                                        <img src="./images/paypal.png">
-                                        <img src="./images/applepay.png">
-                                        <img src="./images/googlepay.png">
+                                        <img src="./images/paypal.png" alt="paypal payment logo">
+                                        <img src="./images/applepay.png" alt="apple pay payment logo">
+                                        <img src="./images/googlepay.png" alt="google pay payment logo">
                                     </div>
                                 </div>
                                 <!-- next button -->
@@ -412,105 +488,6 @@
                 </div>
             </div>
             <!-- end of slide 3 -->
-
-            <!-- SLIDE 4 - PAYMENT -->
-            <div class="slide">
-                <!-- booking progress bar -->
-                <div class="booking-nav">
-                    <!-- active progress indicator -->
-                    <div class="booking-indicator section-one">
-                        <img src="./images/orangefish.png">
-                        <p class="complete">Details</p>
-                    </div>
-                    <!-- active progress indicator -->
-                    <div class="booking-indicator section-two">
-                        <span class="complete-span"></span>
-                        <img src="./images/orangefish.png">
-                        <p class="complete">Payment</p>
-                    </div>
-                    <!-- inactive progress indicator -->
-                    <div class="booking-indicator section-three">
-                        <span></span>
-                        <img src="./images/greyfish.png">
-                        <p>Summary</p>
-                    </div>
-                    <!-- inactive progress indicator -->
-                    <div class="booking-indicator section-four">
-                        <span></span>
-                        <img src="./images/greyfish.png">
-                        <p>Receipt</p>
-                    </div>
-                </div>
-                <!-- payment container -->
-                <div class="booking-container">
-                    <!-- back button -->
-                    <a id="backToDetails" class="back-btn primary-button">
-                        <p>Back</p>
-                    </a>
-                    <div class="booking-details">
-                    </div>
-                </div>
-            </div>
-            <!-- end of slide 4 -->
-
-            <!-- SLIDE 5 - CONFIRM -->
-            <div class="slide">
-                <!-- booking progress bar -->
-                <div class="booking-nav">
-                    <!-- active progress indicator -->
-                    <div class="booking-indicator section-one">
-                        <img src="./images/orangefish.png">
-                        <p class="complete">Details</p>
-                    </div>
-                    <!-- active progress indicator -->
-                    <div class="booking-indicator section-two">
-                        <span class="complete-span"></span>
-                        <img src="./images/orangefish.png">
-                        <p class="complete">Payment</p>
-                    </div>
-                    <!-- active progress indicator -->
-                    <div class="booking-indicator section-three">
-                        <span class="complete-span"></span>
-                        <img src="./images/orangefish.png">
-                        <p class="complete">Summary</p>
-                    </div>
-                    <!-- inactive progress indicator -->
-                    <div class="booking-indicator section-four">
-                        <span></span>
-                        <img src="./images/greyfish.png">
-                        <p>Receipt</p>
-                    </div>
-                </div>
-                <!-- back button -->
-            </div>
-            <!-- end of slide 5 -->
-
-
-            <!-- Slide 6 -->
-            <div class="slide">
-                <div class="booking-nav">
-                    <div class="booking-indicator section-one">
-                        <img src="./images/orangefish.png">
-                        <p class="complete">Details</p>
-                    </div>
-                    <div class="booking-indicator section-two">
-                        <span class="complete-span"></span>
-                        <img src="./images/orangefish.png">
-                        <p class="complete">Payment</p>
-                    </div>
-                    <div class="booking-indicator section-three">
-                        <span class="complete-span"></span>
-                        <img src="./images/orangefish.png">
-                        <p class="complete">Summary</p>
-                    </div>
-                    <div class="booking-indicator section-four">
-                        <span class="complete-span"></span>
-                        <img src="./images/orangefish.png">
-                        <p class="complete">Receipt</p>
-                    </div>
-                </div>
-            </div>
-            <!-- end of slide 6 -->
         </div>
     </div>
 

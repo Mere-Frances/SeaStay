@@ -1,10 +1,5 @@
 /* jshint esversion: 6 */
 
-$(document).ready(function () {
-    let user;
-
-});
-
 const menuOptions = {
     breakfast: [{
             id: 1,
@@ -83,7 +78,6 @@ const menuOptions = {
         }
     ]
 };
-
 
 const properties = [{
         id: 1,
@@ -878,6 +872,9 @@ $(document).ready(function () {
                     populateSelectedProductPrint(property, nights, guests);
                     printTotalPrice(property);
                 }
+                $("#detailsBookingNav").css("display", "flex");
+                $("#paymentBookingNav").css("display", "none");
+                $("#summaryBookingNav").css("display", "none");
             });
 
             $("#backToMain").click(function () {
@@ -948,6 +945,10 @@ $(document).ready(function () {
                 } else {
                     $("#detailsSection").css("display", "none");
                     $("#paymentSection").css("display", "block");
+
+                    $("#detailsBookingNav").css("display", "none");
+                    $("#paymentBookingNav").css("display", "flex");
+                    $("#summaryBookingNav").css("display", "none");
                 }
             });
 
@@ -973,6 +974,10 @@ $(document).ready(function () {
                 $("#detailsSection").css("display", "none");
                 $("#paymentSection").css("display", "none");
                 $("#reviewSection").css("display", "none");
+
+                $("#detailsBookingNav").css("display", "none");
+                $("#paymentBookingNav").css("display", "none");
+                $("#summaryBookingNav").css("display", "flex");
             });
 
             function populateFoodOptions() {
@@ -1062,7 +1067,6 @@ $(document).ready(function () {
                 .addTo(map);
             }
             initialiseMap(previewProperty.longitude, previewProperty.latitude);
-            const pins = document.getElementById('pins')
 
             const thumbnails = document.querySelectorAll(".thumbnail");
             const mainImage = document.getElementById("main-image");
