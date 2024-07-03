@@ -1,29 +1,6 @@
 /* jshint esversion: 6 */
 
 $(document).ready(function () {
-    //  Function to move to the specified section
-    function moveToSection(number) {
-        // v allows you to move sections or "jump"
-        fullpage_api.moveTo(number);
-    }
-
-    // Move to slide # - first number is sectin, second is slide - zero indexed for slides
-    $('#goToSlide1').click(function () {
-        fullpage_api.moveTo(1, 0);
-    });
-
-    $('#goToSlide2').click(function () {
-        fullpage_api.moveTo(1, 1);
-    });
-
-    $('#goToSlide3').click(function () {
-        fullpage_api.moveTo(1, 2);
-    });
-
-    $('#goToSlide4').click(function () {
-        fullpage_api.moveTo(1, 3);
-    });
-
     let user;
 
 });
@@ -570,7 +547,6 @@ const properties = [{
     },
 ];
 
-
 $(document).ready(function () {
     new fullpage('#fullpage', {
         licenseKey: 'gplv3-license',
@@ -578,6 +554,7 @@ $(document).ready(function () {
         fixedElements: "#navbar",
         autoScrolling: true,
         scrollHorizontally: true,
+        keyboardScrolling: false
     });
 
     fullpage_api.setAllowScrolling(true);
@@ -651,8 +628,6 @@ $(document).ready(function () {
             selectedBuildingTypes.push($(this).val());
         });
 
-        console.log(diffDays);
-
         const filteredProperties = properties.filter(property => {
             return (location === 'any' || property.location === location) &&
                 (property.bedrooms >= bedrooms) &&
@@ -672,8 +647,6 @@ $(document).ready(function () {
             displayProperties(filteredProperties.sort((a, b) => parseFloat(b.price) - parseFloat(a.price)));
         });
 
-        console.log(filteredProperties);
-
         displayProperties(filteredProperties);
     }
 
@@ -682,7 +655,7 @@ $(document).ready(function () {
         const endDate = $("#endDate").datepicker("getDate");
 
         if (startDate && endDate) {
-            const timeDiff = Math.abs(endDate.getTime() - startDate.getTime()); // postive number
+            const timeDiff = Math.abs(endDate.getTime() - startDate.getTime());
             const diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
             return diffDays;
         } else {
@@ -772,7 +745,7 @@ $(document).ready(function () {
             button.addEventListener('click', function () {
                 const propertyId = $(this).data('id');
                 const property = properties.find(p => p.id === propertyId);
-                fullpage_api.moveTo(1, 1); // slide 2
+                fullpage_api.moveTo(1, 1);
             });
         });
 
@@ -781,7 +754,6 @@ $(document).ready(function () {
             preview.empty();
             const previewProperty = properties.find(property => property.id === propertyId);
             if (!previewProperty) {
-                console.log('Property not found', propertyId);
                 return;
             }
             preview.append(`
@@ -887,8 +859,9 @@ $(document).ready(function () {
             function printTotalPrice(property) {
                 const totalPrice = $('#totalPrice');
                 totalPrice.empty();
+                const mealPrice = calculateTotalMealPrice();
                 const numOfDays = calculateDays();
-                const cost = property.price * numOfDays + 14.98;
+                const cost = property.price * numOfDays + mealPrice + 14.98;
                 totalPrice.append(`
                 <p>Total</p>
                 <p>$${cost}</p>
@@ -904,8 +877,6 @@ $(document).ready(function () {
                 if (property) {
                     populateSelectedProductPrint(property, nights, guests);
                     printTotalPrice(property);
-                } else {
-                    console.log('Property not found', propertyId);
                 }
             });
 
@@ -1059,6 +1030,15 @@ $(document).ready(function () {
 
             populateFoodOptions();
 
+            function calculateTotalMealPrice() {
+                let totalMealPrice = 0;
+                $('.mealType:checked').each(function () {
+                    const itemPrice = parseFloat($(this).siblings('p').last().text().replace('$', ''));
+                    totalMealPrice += itemPrice;
+                });
+                return totalMealPrice;
+            }
+
             mapboxgl.accessToken = 'pk.eyJ1IjoiY2lhcmFuc2xvdyIsImEiOiJjbHY0ZW91YnYwOGV3MmlwOGQ5b3l3a3J3In0.EFWZEAWA13ehFAw5jdLqJA';
             let map = new mapboxgl.Map({
                 container: 'map',
@@ -1077,8 +1057,13 @@ $(document).ready(function () {
                     center: [longitude, latitude],
                     zoom: 13
                 });
+                new mapboxgl.Marker()
+                .setLngLat([longitude, latitude])
+                .addTo(map);
             }
             initialiseMap(previewProperty.longitude, previewProperty.latitude);
+            const pins = document.getElementById('pins')
+
             const thumbnails = document.querySelectorAll(".thumbnail");
             const mainImage = document.getElementById("main-image");
 
