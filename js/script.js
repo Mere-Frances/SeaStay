@@ -875,6 +875,7 @@ $(document).ready(function () {
                 $("#detailsBookingNav").css("display", "flex");
                 $("#paymentBookingNav").css("display", "none");
                 $("#summaryBookingNav").css("display", "none");
+                $("#receiptBookingNav").css("display", "none");
             });
 
             $("#backToMain").click(function () {
@@ -949,6 +950,7 @@ $(document).ready(function () {
                     $("#detailsBookingNav").css("display", "none");
                     $("#paymentBookingNav").css("display", "flex");
                     $("#summaryBookingNav").css("display", "none");
+                    $("#receiptBookingNav").css("display", "none");
                 }
             });
 
@@ -978,6 +980,7 @@ $(document).ready(function () {
                 $("#detailsBookingNav").css("display", "none");
                 $("#paymentBookingNav").css("display", "none");
                 $("#summaryBookingNav").css("display", "flex");
+                $("#receiptBookingNav").css("display", "none");
             });
 
             function populateFoodOptions() {
