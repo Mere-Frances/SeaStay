@@ -368,8 +368,8 @@ const properties = [{
         rating: '5.0',
         location: 'Abel Tasman',
         address: 'Medlands Beach',
-        longitude: 175.49388227925743,
-        latitude: -36.26531589404831,
+        longitude: 173.05486662789963,
+        latitude: -40.920235232219554,
         houseType: 'Hotel',
         description: 'A serene hotel at Medlands Beach, Abel Tasman.',
         images: [
