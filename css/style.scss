@@ -1003,6 +1003,13 @@ label {
     }
   }
 
+  #detailsReview, #paymentReview{
+    display: flex;
+    flex-direction: column;
+    padding: 30px 0 30px 0;
+    gap: 10px;
+  }
+
   .booking-preview {
     display: flex;
     justify-content: center;
@@ -1024,6 +1031,12 @@ label {
         display: flex;
         flex-direction: column;
         gap: 10px;
+
+        #totalPrice{
+          display: flex;
+          justify-content: space-between;
+          padding: 10px 0;
+        }
 
         span {
           width: 100%;

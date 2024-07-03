@@ -317,7 +317,7 @@
                                 <!-- card expiry & CVV -->
                                 <div class="form-row">
                                     <label for="expiry">Expiry date</label>
-                                    <input type="text" id="expiry" name="expiry" required>
+                                    <input placeholder="MM/YY" type="text" id="expiry" name="expiry" required>
                                     <label for="cvv">CVV</label>
                                     <input type="text" id="cvv" name="cvv" required>
                                 </div>
@@ -346,18 +346,28 @@
                                 <div class="details-review">
                                     <h3>Your Details</h3>
                                     <span></span>
-                                    <div id="detailsReview"></div>
+                                    <div id="detailsReview">
+                                        <h6 id="firstNameReview" class="review-text"></h6>
+                                        <h6 id="lastNameReview" class="review-text"></h6>
+                                        <h6 id="addressReview" class="review-text"></h6>
+                                        <h6 id="emailReview" class="review-text"></h6>
+                                        <h6 id="phoneReview" class="review-text"></h6>
+                                    </div>
                                 </div>
                                 <!-- user payment -->
                                 <div class="payment-review">
                                     <h3>Payment</h3>
                                     <span></span>
-                                    <div id="paymentReview"></div>
+                                    <div id="paymentReview">
+                                        <h6 id="cardNameReview" class="review-text"></h6>
+                                        <h6 id="cardNumberReview" class="review-text"></h6>
+                                        <h6 id="cardExpiryReview" class="review-text"></h6>
+                                    </div>
                                 </div>
                                 <!-- confirm/next button -->
                                 <div class="bottom-row form-row full-width">
                                     <a id="moveToReceipt" class="primary-button">
-                                        <p>Next</p>
+                                        <p>Confirm</p>
                                     </a>
                                 </div>
                             </div>
@@ -384,15 +394,16 @@
                                     <h3>Cart summary</h3>
                                     <span></span>
                                     <div class="cart-details">
-                                        <p>Cleaning fee</p>
-                                        <p>$9.99</p>
+                                        <h6>Cleaning fee</h6>
+                                        <h6>$9.99</h6>
                                     </div>
                                     <div class="cart-details">
-                                        <p>Service fee</p>
-                                        <p>$4.99</p>
+                                        <h6>Service fee</h6>
+                                        <h6>$4.99</h6>
                                     </div>
                                     <!-- total price -->
-                                    <div id="totalPrice" class="total-price"></div>
+                                    <div id="totalPrice" class="total-price">
+                                    </div>
                                 </div>
                             </div>
                         </div>

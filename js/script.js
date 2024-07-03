@@ -572,7 +572,6 @@ const properties = [{
 
 
 $(document).ready(function () {
-    // Fullpage Init:
     new fullpage('#fullpage', {
         licenseKey: 'gplv3-license',
         controlArrows: false,
@@ -581,46 +580,22 @@ $(document).ready(function () {
         scrollHorizontally: true,
     });
 
-
-
-    // Prevent scroll of sections and slides:
     fullpage_api.setAllowScrolling(true);
 
-    // // Swiper Init:
-    // let swiper = new Swiper('.swiper', {
-    //     // Optional parameters
-    //     direction: 'horizontal',
-    //     // If we need pagination
-    //     pagination: {
-    //         el: '.swiper-pagination',
-    //     },
-
-    //     // Navigation arrows
-    //     navigation: {
-    //         nextEl: '.swiper-button-next',
-    //         prevEl: '.swiper-button-prev',
-    //     },
-    // });
-
-    // Populate Locations Options/Filtering:
     function populateLocationOptions() {
         const locations = Array.from(new Set(properties.map(property => property.location)));
-        locations.sort(); // Sorts locations alphabetically
-        const locationSelect = $('#location'); // get the select
-        locationSelect.empty(); // Clear previous options
-        // Add "Any" option:
+        locations.sort();
+        const locationSelect = $('#location');
+        locationSelect.empty();
         locationSelect.append(`<option value="any">Any</option>`);
-        // Create an option for each location:
         locations.forEach(location => {
             locationSelect.append(`<option value="${location}">${location}</option>`);
         });
     }
 
-    // Call the function:
     populateLocationOptions();
 
-
-    // Validate Filters/Form
+    // FILTERS
     function validateFilters() {
         let isValid = true;
         let errorMessage = "";
@@ -648,7 +623,7 @@ $(document).ready(function () {
         return isValid;
     }
 
-    // DatePickers:
+    // DATEPICKER
     $("#startDate").datepicker({
         dateFormat: "dd/mm/yy"
     });
@@ -656,7 +631,7 @@ $(document).ready(function () {
         dateFormat: "dd/mm/yy"
     });
 
-    // Search Button Click:
+    // SEARCH
     $("#searchBtn").click(function (e) {
         e.preventDefault();
         if (validateFilters()) {
@@ -666,7 +641,6 @@ $(document).ready(function () {
 
     // FILTERS + DISPLAY RESULTS
     function filterAndDisplayProperties() {
-        // VALUE OF FILTERS
         const location = $('#location').val();
         const bedrooms = parseInt($('#bedrooms').val(), 10) || 0;
         const bathrooms = parseInt($('#bathrooms').val(), 10) || 0;
@@ -679,7 +653,6 @@ $(document).ready(function () {
 
         console.log(diffDays);
 
-        // SEARCH ARRAY FOR FILTERS
         const filteredProperties = properties.filter(property => {
             return (location === 'any' || property.location === location) &&
                 (property.bedrooms >= bedrooms) &&
@@ -709,9 +682,7 @@ $(document).ready(function () {
         const endDate = $("#endDate").datepicker("getDate");
 
         if (startDate && endDate) {
-            // calculate the difference:
             const timeDiff = Math.abs(endDate.getTime() - startDate.getTime()); // postive number
-            // convert to days:
             const diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
             return diffDays;
         } else {
@@ -780,7 +751,7 @@ $(document).ready(function () {
             `;
             products.innerHTML += propertyHtml;
         });
-        // Reinitialize Swiper after updating the DOM
+
         const swipers = document.querySelectorAll('.swiper');
         swipers.forEach(swiperEl => {
             new Swiper(swiperEl, {
@@ -789,14 +760,14 @@ $(document).ready(function () {
                     el: '.swiper-pagination',
                     clickable: true,
                 },
-                // Navigation arrows
+
                 navigation: {
                     nextEl: '.swiper-button-next',
                     prevEl: '.swiper-button-prev',
                 },
             });
         });
-        // Add event listener for all 'Book now' buttons
+
         document.querySelectorAll('.book-now-btn').forEach(button => {
             button.addEventListener('click', function () {
                 const propertyId = $(this).data('id');
@@ -867,20 +838,6 @@ $(document).ready(function () {
                         <div class="property-content">
                             <div class="property-text">
                                 <p>${previewProperty.description}<br><br>${previewProperty.bio}</p>
-                                <div class="counters">
-                                    <div class="counter">
-                                        <label for="nights">Nights:</label>
-                                        <button class="decrement" data-type="nights">-</button>
-                                        <input type="number" id="nights" min="${previewProperty.minNights}" max="${previewProperty.maxNights}" value="${previewProperty.minNights}">
-                                        <button class="increment" data-type="nights">+</button>
-                                    </div>
-                                    <div class="counter">
-                                        <label for="guests">Guests:</label>
-                                        <button class="decrement" data-type="guests">-</button>
-                                        <input type="number" id="guests" min="${previewProperty.minGuests}" max="${previewProperty.maxGuests}" value="${previewProperty.minGuests}">
-                                        <button class="increment" data-type="guests">+</button>
-                                    </div>
-                                </div>
                                 <div class="buttons">
                                     <a href="#meals" class="meals-btn primary-button" data-id="${previewProperty.id}">
                                         <p>Add a meal</p>
@@ -908,38 +865,18 @@ $(document).ready(function () {
                 </div>
             `);
 
-            // Event listeners for increment and decrement buttons
-            $('.increment').on('click', function () {
-                const type = $(this).data('type');
-                const input = $(`#${type}`);
-                let currentValue = parseInt(input.val(), 10);
-                const max = parseInt(input.attr('max'), 10);
-                if (currentValue < max) {
-                    input.val(currentValue + 1);
-                }
-            });
-
-            $('.decrement').on('click', function () {
-                const type = $(this).data('type');
-                const input = $(`#${type}`);
-                let currentValue = parseInt(input.val(), 10);
-                const min = parseInt(input.attr('min'), 10);
-                if (currentValue > min) {
-                    input.val(currentValue - 1);
-                }
-            });
-
-            // Function to populate the selected product print
-            function populateSelectedProductPrint(property, nights, guests) {
+            function populateSelectedProductPrint(property) {
                 const selectedProductPrint = $('#selectedProductPrint');
                 selectedProductPrint.empty();
+                const nightDays = calculateDays();
+                const NumOfGuests = $('#guests').val();
                 selectedProductPrint.append(`
                 <div class="selected-property">
                     <div class="booking-text">
                         <h6>${property.name}</h6>
                         <h6>${property.houseType}</h6>
-                        <h6>${nights} Nights</h6>
-                        <h6>${guests} Guests</h6>
+                        <h6>${nightDays} Nights</h6>
+                        <h6>${NumOfGuests} Guests</h6>
                         <h6>$${property.price} per night</h6>
                     </div>
                     <img class="booking-img" src="${property.images[0]}" alt="${property.name}">
@@ -947,14 +884,26 @@ $(document).ready(function () {
                 `);
             }
 
-            $('#moveToDetails').on('click', function() {
+            function printTotalPrice(property) {
+                const totalPrice = $('#totalPrice');
+                totalPrice.empty();
+                const numOfDays = calculateDays();
+                const cost = property.price * numOfDays + 14.98;
+                totalPrice.append(`
+                <p>Total</p>
+                <p>$${cost}</p>
+                `);
+            }
+
+            $('#moveToDetails').on('click', function () {
                 const propertyId = $(this).data('id');
                 const property = properties.find(property => property.id === propertyId);
                 const nights = $('#nights').val();
                 const guests = $('#guests').val();
-            
+
                 if (property) {
                     populateSelectedProductPrint(property, nights, guests);
+                    printTotalPrice(property);
                 } else {
                     console.log('Property not found', propertyId);
                 }
@@ -976,29 +925,88 @@ $(document).ready(function () {
                 fullpage_api.moveTo(1, 2);
             });
 
-            $("#moveToPayment").click(function () {
-                $("#detailsSection").css("display", "none");
-                $("#paymentSection").css("display", "block");
-                // fullpage_api.moveTo(1, 3);
+            document.getElementById('moveToReview').addEventListener('click', function (event) {
+                event.preventDefault();
+
+                const cardName = document.getElementById('card-name').value;
+                const cardNumber = document.getElementById('card-number').value;
+                const expiry = document.getElementById('expiry').value;
+                const cvv = document.getElementById('cvv').value;
+
+                const cardNumberRegex = /^\d{16}$/;
+                if (!cardNumberRegex.test(cardNumber)) {
+                    alert('Please enter a valid 16-digit card number.');
+                }
+                const expiryRegex = /^(0[1-9]|1[0-2])\/?([0-9]{2})$/;
+                if (!expiryRegex.test(expiry)) {
+                    alert('Please enter a valid expiry date (MM/YY).');
+                }
+                const cvvRegex = /^[0-9]{3,4}$/;
+                if (!cvvRegex.test(cvv)) {
+                    alert('Please enter a valid CVV.');
+                } else {
+                    $("#moveToReview").click(function () {
+                        $("#detailsSection").css("display", "none");
+                        $("#paymentSection").css("display", "none");
+                        $("#reviewSection").css("display", "block");
+                    });
+                }
             });
+
+            $("#moveToPayment").click(function (event) {
+                event.preventDefault();
+
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                const regexPattern = /.+/;
+                const firstName = $('#first-name').val();
+                const lastName = $('#last-name').val();
+                const address = $('#address').val();
+                const email = $('#email').val();
+                const phone = $('#phone').val();
+
+                if (!regexPattern.test(firstName)) {
+                    alert("Please enter your first name");
+                } else if (!regexPattern.test(lastName)) {
+                    alert("Please enter your last name");
+                } else if (!regexPattern.test(address)) {
+                    alert("Please enter your address");
+                } else if (!regexPattern.test(phone)) {
+                    alert("Please enter your phone number");
+                } else if (!emailRegex.test(email)) {
+                    alert('Please enter a valid email');
+                } else {
+                    $("#detailsSection").css("display", "none");
+                    $("#paymentSection").css("display", "block");
+                }
+            });
+
             $("#moveToReview").click(function () {
-                $("#detailsSection").css("display", "none");
-                $("#paymentSection").css("display", "none");
-                $("#reviewSection").css("display", "block");
-                // fullpage_api.moveTo(1, 3);
-            });
-            $("#moveToReceipt").click(function () {
+                var userFirstName = $('#first-name').val();
+                $('#firstNameReview').text(userFirstName);
+                var userLastName = $('#last-name').val();
+                $('#lastNameReview').text(userLastName);
+                var userAddress = $('#address').val();
+                $('#addressReview').text(userAddress);
+                var userEmail = $('#email').val();
+                $('#emailReview').text(userEmail);
+                var userPhone = $('#phone').val();
+                $('#phoneReview').text(userPhone);
+
+                var userCardName = $('#card-name').val();
+                $('#cardNameReview').text(userCardName);
+                var userCardNumber = $('#card-number').val();
+                $('#cardNumberReview').text(userCardNumber);
+                var userCardExpiry = $('#expiry').val();
+                $('#cardExpiryReview').text(userCardExpiry);
+
                 $("#detailsSection").css("display", "none");
                 $("#paymentSection").css("display", "none");
                 $("#reviewSection").css("display", "none");
-                // $("#").css("display", "block");
-                // fullpage_api.moveTo(1, 3);
             });
 
-            // Function to populate food options
             function populateFoodOptions() {
                 const foodOptionsDiv = $('#food-options');
-                foodOptionsDiv.empty(); // Clear any existing content
+                foodOptionsDiv.empty();
 
                 Object.keys(menuOptions).forEach(category => {
                     const categoryHeader = `<h3>${category.charAt(0).toUpperCase() + category.slice(1)}</h3>`;
@@ -1037,11 +1045,10 @@ $(document).ready(function () {
                         detailsFoodCart.append(cartItemHTML);
                         foodCartDiv.append(cartItemHTML);
 
-                        // Add event listener for remove button
                         $(`#cart-${checkbox.val()} #removeMeal`).click(function () {
                             $(`#cart-${checkbox.val()}`).remove();
                             $(`#selectedMealsPrint-${checkbox.val()}`).remove();
-                            checkbox.prop('checked', false); // Uncheck the corresponding checkbox
+                            checkbox.prop('checked', false);
                         });
                     } else {
                         $(`#cart-${checkbox.val()}`).remove();
@@ -1051,15 +1058,14 @@ $(document).ready(function () {
             }
 
             populateFoodOptions();
-            // MapBox Init:
+
             mapboxgl.accessToken = 'pk.eyJ1IjoiY2lhcmFuc2xvdyIsImEiOiJjbHY0ZW91YnYwOGV3MmlwOGQ5b3l3a3J3In0.EFWZEAWA13ehFAw5jdLqJA';
             let map = new mapboxgl.Map({
                 container: 'map',
-                style: 'mapbox://styles/mapbox/streets-v11', // style URL
-                center: [175.52223763296442, -39.332562526208825], // starting position [lng, lat]
-                zoom: 5 // starting zoom
+                style: 'mapbox://styles/mapbox/streets-v11',
+                center: [175.52223763296442, -39.332562526208825],
+                zoom: 5
             });
-            // Set map container dimensions to match its parent
             map.on('load', function () {
                 map.resize();
             });
@@ -1073,7 +1079,6 @@ $(document).ready(function () {
                 });
             }
             initialiseMap(previewProperty.longitude, previewProperty.latitude);
-            // Add event listeners to thumbnails
             const thumbnails = document.querySelectorAll(".thumbnail");
             const mainImage = document.getElementById("main-image");
 
@@ -1091,32 +1096,23 @@ $(document).ready(function () {
         });
     }
 
-    // Rebuild Fullpage to see the new slides
     fullpage_api.reBuild();
 
 });
 
-// --------******* SWIPER JS ******-------
-
-// init Swiper
 const swiper = new Swiper('.swiper', {
-    // Optional parameters
     direction: 'vertical',
 
-    // If we need pagination
     pagination: {
         el: '.swiper-pagination',
         clickable: true,
     },
 
-    // Navigation arrows
     navigation: {
         nextEl: '.swiper-button-next',
         prevEl: '.swiper-button-prev',
     },
 });
-
-// populateProperties(properties);
 
 document.getElementById('open').addEventListener('click', function (event) {
     event.preventDefault();
@@ -1138,7 +1134,6 @@ document.getElementById('open').addEventListener('click', function (event) {
     });
 });
 
-
 document.getElementById('show').addEventListener('click', function (event) {
     event.preventDefault();
 
@@ -1150,13 +1145,13 @@ document.getElementById('show').addEventListener('click', function (event) {
         sortText.textContent = 'Sort';
         setTimeout(() => {
             box.classList.remove('show');
-        }, 500); // Match the duration of the transition
+        }, 500);
     } else {
         box.style.display = 'flex';
         sortText.textContent = 'Close';
-        setTimeout(() => { // Delay to allow display change to take effect
+        setTimeout(() => {
             box.classList.add('show');
-        }, 10); // Small delay (10ms)
+        }, 10);
     }
 });
 
@@ -1167,12 +1162,10 @@ window.addEventListener('scroll', function () {
     let currentScroll = window.pageYOffset || document.documentElement.scrollTop;
 
     if (currentScroll > lastScrollTop) {
-        // Downscroll
         nav.classList.add('nav-hidden');
     } else {
-        // Upscroll
         nav.classList.remove('nav-hidden');
     }
 
-    lastScrollTop = currentScroll <= 0 ? 0 : currentScroll; // For Mobile or negative scrolling
+    lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
 });
