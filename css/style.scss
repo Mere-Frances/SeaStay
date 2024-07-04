@@ -754,6 +754,26 @@ label {
   display: none;
 }
 
+#receiptSection {
+  display: none;
+  width: 100%;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  .receipt-box{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    .primary-button{
+      margin: 0;
+    }
+  }
+}
+
 #detailsBookingNav, .paymentBookingNav, .summaryBookingNav .receiptBookingNav {
   display: none;
 }

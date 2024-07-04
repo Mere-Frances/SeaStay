@@ -983,6 +983,19 @@ $(document).ready(function () {
                 $("#receiptBookingNav").css("display", "none");
             });
 
+            $("#moveToReceipt").click(function () {
+                $("#detailsSection").css("display", "none");
+                $("#paymentSection").css("display", "none");
+                $("#reviewSection").css("display", "none");
+                $(".booking-preview").css("display", "none");
+                $("#receiptSection").css("display", "flex");
+
+                $("#detailsBookingNav").css("display", "none");
+                $("#paymentBookingNav").css("display", "none");
+                $("#summaryBookingNav").css("display", "none");
+                $("#receiptBookingNav").css("display", "flex");
+            });
+
             function populateFoodOptions() {
                 const foodOptionsDiv = $('#food-options');
                 foodOptionsDiv.empty();
